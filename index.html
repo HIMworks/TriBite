@@ -742,11 +742,11 @@ function renderLogo(){
     const hctx = headerCanvas.getContext('2d');
     drawLogoIcon(hctx, headerCanvas.width);
   }
-  const favCanvas = document.createElement('canvas');
+  /*const favCanvas = document.createElement('canvas');
   favCanvas.width = 64; favCanvas.height = 64;
   drawLogoIcon(favCanvas.getContext('2d'), 64);
   const favLink = document.getElementById('favicon-link');
-  if(favLink) favLink.href = favCanvas.toDataURL('image/png');
+  if(favLink) favLink.href = favCanvas.toDataURL('image/png');*/
 }
 
 /* ===================== toast / confirm helpers ===================== */
