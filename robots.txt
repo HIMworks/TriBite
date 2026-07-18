@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://himworks.github.io/tribite/sitemap.xml
