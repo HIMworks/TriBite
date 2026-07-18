@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://himworks.github.io/tribite/sitemap.xml
+Sitemap: https://himworks.github.io/TriBite/sitemap.xml
