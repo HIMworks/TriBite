@@ -1,0 +1,2910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2678821661093629" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YZRT1SWC20"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YZRT1SWC20');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>TriBite</title>
+<link rel="icon" id="favicon-link" type="image/png" href="favicon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#3B9DFF">
+<link rel="apple-touch-icon" href="favicon.png">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root[data-theme="dark"]{
+  --bg:#0d0f14; --surface:#171a21; --surface2:#1e222b; --text:#eef1f7;
+  --muted:#8b93a7; --accent:#ffcf56; --accent-ink:#241a00; --accent2:#5fd4c7;
+  --danger:#ff6b6b; --border:#2a2f3a; --shadow:#000000;
+}
+:root[data-theme="light"]{
+  --bg:#efeadd; --surface:#ffffff; --surface2:#f7f4ea; --text:#1c1e24;
+  --muted:#666b78; --accent:#b8791f; --accent-ink:#fff7e6; --accent2:#127b70;
+  --danger:#b23a3a; --border:#1c1e24; --shadow:#1c1e24;
+}
+:root[data-theme="cosmic"]{
+  --bg:#050214; --surface:#140a30; --surface2:#1c0f42; --text:#fff8e6;
+  --muted:#c9b8ff; --accent:#ffd76a; --accent-ink:#1c0f42; --accent2:#9fe8ff;
+  --danger:#ff6b6b; --border:#ffd76a; --shadow:#000000;
+}
+:root[data-theme="cosmic"] body{
+  background-color:#050214;
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(255,255,255,0.9) 0 1px, transparent 1px),
+    radial-gradient(circle at 65% 15%, rgba(255,255,255,0.7) 0 1px, transparent 1px),
+    radial-gradient(circle at 85% 45%, rgba(255,255,255,0.8) 0 1px, transparent 1px),
+    radial-gradient(circle at 35% 70%, rgba(255,255,255,0.6) 0 1px, transparent 1px),
+    radial-gradient(circle at 55% 90%, rgba(255,255,255,0.9) 0 1px, transparent 1px),
+    radial-gradient(circle at 10% 85%, rgba(255,255,255,0.5) 0 1px, transparent 1px),
+    linear-gradient(160deg, #050214 0%, #1a0d3d 45%, #050214 100%);
+  background-size:170px 170px, 230px 230px, 260px 260px, 200px 200px, 240px 240px, 190px 190px, cover;
+  background-attachment:fixed;
+}
+:root[data-theme="cosmic"] #app{ background:transparent; }
+:root[data-theme="cosmic"] body, :root[data-theme="cosmic"] input, :root[data-theme="cosmic"] select, :root[data-theme="cosmic"] .calc-key, :root[data-theme="cosmic"] .tb-btn{
+  text-shadow:0 0 8px rgba(255,215,106,0.45), 0 0 2px rgba(255,255,255,0.7);
+}
+:root[data-theme="cosmic"] .pixel-font{
+  background:linear-gradient(90deg, #fff8e6, #ffd76a, #fff8e6, #ffd76a);
+  background-size:200% auto;
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation:cosmicShimmer 3.5s linear infinite;
+}
+@keyframes cosmicShimmer{ 0%{background-position:0% center;} 100%{background-position:200% center;} }
+:root[data-theme="dark"] #text-pane [style*="rgb(28, 30, 36)"],
+:root[data-theme="dark"] #text-pane [style*="#1c1e24"],
+:root[data-theme="dark"] #text-pane [style*="rgb(0, 0, 0)"],
+:root[data-theme="dark"] #text-pane [style*="#000000"],
+:root[data-theme="dark"] .nc-prev[style*="rgb(28, 30, 36)"],
+:root[data-theme="cosmic"] #text-pane [style*="rgb(28, 30, 36)"],
+:root[data-theme="cosmic"] #text-pane [style*="#1c1e24"],
+:root[data-theme="cosmic"] #text-pane [style*="rgb(0, 0, 0)"],
+:root[data-theme="cosmic"] #text-pane [style*="#000000"]{
+  color:#ffffff !important;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;}
+body{
+  background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  min-height:100vh; overflow-x:hidden;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:24px 24px; background-position:-1px -1px;
+  background-attachment:fixed;
+  transition:background-color .2s, color .2s;
+}
+:root[data-theme="light"] body{background-image:
+    linear-gradient(rgba(0,0,0,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,.05) 1px, transparent 1px);}
+.pixel-font{font-family:'Press Start 2P','Courier New',monospace; letter-spacing:.5px;}
+#app{max-width:640px; margin:0 auto; min-height:100vh; background:var(--bg); position:relative; display:flex; flex-direction:column;}
+
+/* Top bar */
+#topbar{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:3px solid var(--border);}
+#topbar .brand{display:flex; align-items:center; gap:10px;}
+#topbar .brand .dot{width:14px;height:14px;background:var(--accent);border:2px solid var(--border);}
+#logo-mark{width:28px; height:28px; border:2px solid var(--border); border-radius:6px; flex-shrink:0; object-fit:cover;}
+#topbar h1{font-size:15px; margin:0;}
+#topbar .controls{display:flex; gap:10px; position:relative;}
+.icon-btn{
+  width:42px; height:42px; border:2px solid var(--border); background:var(--surface); color:var(--text);
+  display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:19px;
+  box-shadow:2px 2px 0 var(--shadow);
+}
+.icon-btn:active{transform:translate(2px,2px); box-shadow:none;}
+
+/* dropdowns */
+.dropdown{
+  position:absolute; top:44px; right:0; background:var(--surface); border:2px solid var(--border);
+  box-shadow:4px 4px 0 var(--shadow); width:250px; padding:12px; z-index:50; display:none;
+}
+.dropdown.open{display:block;}
+.dropdown h4{margin:0 0 8px; font-size:11px; text-transform:uppercase; color:var(--muted); letter-spacing:.08em;}
+.acc-row{display:flex; align-items:center; padding:8px; border:2px solid transparent; cursor:pointer; margin-bottom:4px; gap:8px;}
+.acc-row.active{border-color:var(--border); background:var(--surface2);}
+.acc-row span.name{font-size:13px; flex:1;}
+.acc-row button{border:none; background:none; color:var(--muted); cursor:pointer; font-size:12px;}
+.acc-avatar{width:30px; height:30px; border-radius:50%; border:2px solid var(--border); object-fit:cover; flex-shrink:0;}
+.acc-avatar-placeholder{display:flex; align-items:center; justify-content:center; background:var(--surface2); font-size:14px;}
+.acc-btn-avatar{width:36px; height:36px; border-radius:50%; object-fit:cover;}
+.theme-row{display:flex; gap:6px;}
+.theme-opt{flex:1; padding:8px 4px; border:2px solid var(--border); background:var(--surface2); text-align:center; font-size:11px; cursor:pointer;}
+.theme-opt.active{background:var(--accent); color:var(--accent-ink); font-weight:bold;}
+
+/* side drawer */
+#drawer-overlay{position:fixed; inset:0; background:rgba(0,0,0,0); pointer-events:none; z-index:600; transition:background .25s;}
+#drawer-overlay.open{background:rgba(0,0,0,.5); pointer-events:auto;}
+#drawer{
+  position:fixed; top:0; left:0; bottom:0; width:80%; max-width:300px; background:var(--surface);
+  border-right:3px solid var(--border); box-shadow:6px 0 0 var(--shadow);
+  transform:translateX(-105%); transition:transform .25s ease; display:flex; flex-direction:column; z-index:601;
+}
+#drawer-overlay.open #drawer{ transform:translateX(0); }
+.drawer-header{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:2px solid var(--border);}
+.drawer-content{flex:1; padding:14px; display:flex; flex-direction:column; gap:10px; overflow-y:auto;}
+.drawer-item{
+  text-align:left; padding:14px; border:2px solid var(--border); background:var(--surface2); color:var(--text);
+  font-size:14px; cursor:pointer; box-shadow:3px 3px 0 var(--shadow);
+}
+.drawer-item:active{ transform:translate(3px,3px); box-shadow:none; }
+.drawer-item.danger{ color:var(--danger); }
+.drawer-panel-title{ font-size:11px; margin:4px 0; }
+.drawer-panel-body{ font-size:12px; line-height:1.6; color:var(--muted); }
+.drawer-footer{ padding:16px; border-top:2px solid var(--border); text-align:center; }
+.drawer-tagline{ font-size:10px; letter-spacing:.05em; color:var(--muted); margin-bottom:8px; font-family:'Courier New',monospace; white-space:nowrap; }
+.drawer-version{ font-size:10px; color:var(--accent); font-family:'Courier New',monospace; margin-bottom:8px; letter-spacing:.05em; }
+.drawer-credit{ font-size:13px; margin-bottom:4px; }
+.drawer-credit .accent-text{ color:var(--accent); font-weight:bold; }
+.drawer-copy{ font-size:10px; color:var(--muted); }
+#doom-overlay{
+  position:fixed; inset:0; background:crimson; z-index:550; display:none; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center; padding:24px;
+}
+#doom-text{
+  font-family:'Press Start 2P','Courier New',monospace; font-weight:bold; color:#ffffff;
+  font-size:22px; line-height:1.7; letter-spacing:1px; text-shadow:4px 4px 0 rgba(0,0,0,0.45);
+}
+#doom-escape-btn{
+  margin-top:26px; padding:10px 18px; border:2px solid rgba(255,255,255,0.6); background:rgba(0,0,0,0.25);
+  color:#ffffff; font-size:12px; cursor:pointer; font-family:'Courier New',monospace;
+}
+#doom-escape-btn:active{ background:rgba(0,0,0,0.4); }
+
+/* Home */
+#home{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:26px; padding:34px 20px;}
+.home-title{font-size:14px; text-align:center; color:var(--muted); margin-bottom:6px;}
+.tile{
+  width:100%; max-width:440px; display:flex; align-items:center; gap:20px; padding:24px;
+  background:var(--surface); border:3px solid var(--border); box-shadow:6px 6px 0 var(--shadow); cursor:pointer;
+}
+.tile:active{transform:translate(4px,4px); box-shadow:2px 2px 0 var(--shadow);}
+.tile canvas{image-rendering:pixelated; flex-shrink:0; width:50px; height:50px;}
+.tile .label{font-size:17px; font-weight:bold;}
+.tile .sub{font-size:13px; color:var(--muted); margin-top:3px;}
+
+/* generic view header */
+.view{flex:1; display:none; flex-direction:column;}
+.view.active, #home, #poly-panel.active, #history-panel.active, #convert-panel.active, #shop-panel.active, #ach-panel.active, #editor.active{ animation: viewFadeIn .28s ease; }
+@keyframes viewFadeIn{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+.tile, .note-card, .drawer-item, .icon-btn, .calc-key, .game-btn, .shop-item-btn, #bite-send-btn, #bite-stop-btn, .tb-btn, .back-btn{ transition: transform .1s ease, box-shadow .1s ease; }
+.view.active{display:flex;}
+.view-header{display:flex; align-items:center; gap:10px; padding:12px 16px; border-bottom:2px solid var(--border);}
+.back-btn{border:2px solid var(--border); background:var(--surface); box-shadow:2px 2px 0 var(--shadow); width:34px; height:34px; cursor:pointer; font-size:16px; color:var(--text);}
+.back-btn:active{transform:translate(2px,2px); box-shadow:none;}
+.view-header h2{font-size:13px; margin:0;}
+
+/* ===== CALCULATOR ===== */
+#calc-body{padding:14px; display:flex; flex-direction:column; gap:10px; flex:1;}
+#calc-display{background:var(--surface2); border:2px solid var(--border); padding:14px; min-height:76px; text-align:right; display:flex; flex-direction:column; justify-content:flex-end;}
+#calc-expr{color:var(--muted); font-size:12px; min-height:16px; word-break:break-all;}
+#calc-current{font-size:26px; font-family:'Courier New',monospace; word-break:break-all;}
+#calc-msg{font-size:10px; color:var(--danger); min-height:14px;}
+.calc-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px;}
+.calc-key{
+  padding:16px 0; border:2px solid var(--border); background:var(--surface); font-size:14px; cursor:pointer;
+  box-shadow:3px 3px 0 var(--shadow); font-family:'Courier New',monospace;
+}
+.calc-key:active{transform:translate(3px,3px); box-shadow:none;}
+.calc-key.op{background:var(--accent); color:var(--accent-ink); font-weight:bold;}
+.calc-key.fn{background:var(--surface2); color:var(--accent2); font-weight:bold;}
+.calc-key.eq{background:var(--accent2); color:#fff; grid-column:span 2;}
+.calc-key.wide{grid-column:span 2;}
+#poly-panel{display:none; flex-direction:column; gap:10px; padding:14px; flex:1; overflow-y:auto;}
+#poly-panel.active{display:flex;}
+#poly-degree{padding:10px; border:2px solid var(--border); background:var(--surface); color:var(--text); font-size:12px;}
+#poly-inputs{display:flex; gap:8px; flex-wrap:wrap;}
+.poly-field{display:flex; flex-direction:column; gap:4px; flex:1; min-width:60px;}
+.poly-field label{font-size:11px; color:var(--muted); font-family:'Courier New',monospace;}
+.poly-field input{border:2px solid var(--border); background:var(--surface2); color:var(--text); padding:8px; font-size:14px; font-family:'Courier New',monospace; width:100%;}
+#poly-result{background:var(--surface2); border:2px solid var(--border); padding:12px; font-family:'Courier New',monospace; font-size:13px; min-height:60px; white-space:pre-line;}
+#poly-steps{background:var(--surface2); border:2px solid var(--border); padding:12px; font-family:'Courier New',monospace; font-size:11.5px; white-space:pre-line; line-height:1.6; color:var(--muted);}
+.poly-section-label{font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-top:2px;}
+.calc-toolbar{display:flex; gap:8px; padding:10px 14px 0;}
+#history-panel, #convert-panel{display:none; flex-direction:column; gap:10px; padding:14px; flex:1; overflow-y:auto;}
+#history-panel.active, #convert-panel.active{display:flex;}
+.history-item{background:var(--surface2); border:2px solid var(--border); padding:10px 12px; cursor:pointer; box-shadow:2px 2px 0 var(--shadow);}
+.history-item:active{transform:translate(2px,2px); box-shadow:none;}
+.history-item .h-expr{font-size:12px; color:var(--muted); font-family:'Courier New',monospace;}
+.history-item .h-result{font-size:16px; font-weight:bold; font-family:'Courier New',monospace;}
+#convert-category{padding:10px; border:2px solid var(--border); background:var(--surface); color:var(--text); font-size:12px;}
+.convert-row{display:flex; gap:8px;}
+.convert-row input{flex:1; border:2px solid var(--border); background:var(--surface2); color:var(--text); padding:10px; font-size:16px; font-family:'Courier New',monospace; min-width:0;}
+.convert-row select{flex:1; border:2px solid var(--border); background:var(--surface); color:var(--text); padding:10px; font-size:12px; min-width:0;}
+.convert-arrow{text-align:center; color:var(--accent); font-size:18px;}
+.calc-key.num{ background:#14161b; color:#ffffff; border-color:#000000; }
+
+/* ===== GAME ===== */
+#game-body{flex:1; display:flex; flex-direction:column; align-items:center; padding:10px; gap:8px;}
+#game-hud{width:100%; max-width:340px; display:flex; justify-content:space-between; font-size:12px; padding:0 4px;}
+#game-canvas{border:3px solid var(--border); background:#060606; image-rendering:pixelated; max-width:100%;}
+#game-controls{display:flex; gap:10px; width:100%; max-width:340px; justify-content:center;}
+
+/* Level bar */
+#hud-level-row{display:flex; align-items:center; gap:8px; width:100%; max-width:340px; font-size:11px; color:var(--muted);}
+#hud-level{flex-shrink:0; color:var(--accent); font-weight:bold;}
+#hud-level-bar{flex:1; height:8px; background:var(--surface2); border:2px solid var(--border);}
+#hud-level-fill{height:100%; background:var(--accent); width:0%; transition:width .3s;}
+
+/* Shop */
+#shop-panel, #ach-panel{display:none; flex-direction:column; gap:10px; padding:14px; flex:1; overflow-y:auto;}
+#shop-panel.active, #ach-panel.active{display:flex;}
+.shop-tabs{display:flex; gap:6px;}
+.shop-tab{flex:1; text-align:center; padding:8px; border:2px solid var(--border); background:var(--surface2); color:var(--muted); cursor:pointer; font-size:12px;}
+.shop-tab.active{background:var(--accent); color:var(--accent-ink); font-weight:bold;}
+.shop-list{display:flex; flex-direction:column; gap:10px;}
+.shop-item{display:flex; align-items:center; gap:12px; background:var(--surface2); border:2px solid var(--border); padding:10px 12px;}
+.shop-item-swatch{width:36px; height:36px; flex-shrink:0; border:2px solid var(--border);}
+.shop-item-info{flex:1;}
+.shop-item-name{font-size:13px; font-weight:bold;}
+.shop-item-price{font-size:11px; color:var(--muted);}
+.shop-item-btn{border:2px solid var(--border); background:var(--accent); color:var(--accent-ink); font-weight:bold; font-size:11px; padding:8px 12px; cursor:pointer; flex-shrink:0;}
+.shop-item-btn:disabled{opacity:0.5; cursor:default;}
+.shop-item-btn.equipped{background:var(--accent2); color:#fff;}
+
+/* Achievements */
+.ach-item{display:flex; align-items:center; gap:12px; background:var(--surface2); border:2px solid var(--border); padding:10px 12px; margin-bottom:10px;}
+.ach-item.locked{opacity:0.45;}
+.ach-icon{font-size:20px; width:28px; text-align:center; flex-shrink:0;}
+.ach-name{font-size:13px; font-weight:bold;}
+.ach-desc{font-size:11px; color:var(--muted);}
+
+/* Purchasable themes */
+:root[data-theme="theme-sunset"]{
+  --bg:#2b0f1a; --surface:#3d1626; --surface2:#4a1c30; --text:#ffe8d6;
+  --muted:#d99a8a; --accent:#ff7a59; --accent-ink:#2b0f1a; --accent2:#ffb347;
+  --danger:#ff5c5c; --border:#ff7a59; --shadow:#000000;
+}
+:root[data-theme="theme-ocean"]{
+  --bg:#071a2b; --surface:#0d2740; --surface2:#123049; --text:#dff6ff;
+  --muted:#7fb3cc; --accent:#2fc7d6; --accent-ink:#071a2b; --accent2:#5fe0c0;
+  --danger:#ff6b6b; --border:#2fc7d6; --shadow:#000000;
+}
+:root[data-theme="theme-forest"]{
+  --bg:#0e1a0d; --surface:#16260f; --surface2:#1c3014; --text:#e6f5df;
+  --muted:#9dbf8a; --accent:#7ac74f; --accent-ink:#0e1a0d; --accent2:#c9e26a;
+  --danger:#ff6b6b; --border:#7ac74f; --shadow:#000000;
+}
+.game-btn{flex:1; padding:16px 0; border:2px solid var(--border); background:var(--surface); box-shadow:3px 3px 0 var(--shadow); font-size:20px; cursor:pointer; user-select:none; display:flex; align-items:center; justify-content:center;}
+.game-btn:active{transform:translate(3px,3px); box-shadow:none;}
+#game-overlay{position:absolute; inset:0; background:rgba(0,0,0,.55); display:none; align-items:center; justify-content:center; flex-direction:column; gap:10px; color:#fff; text-align:center; padding:20px;}
+#game-overlay.show{display:flex;}
+#game-overlay button{padding:10px 20px; border:2px solid #fff; background:var(--accent); color:var(--accent-ink); font-weight:bold; cursor:pointer;}
+#collect-toast{position:absolute; top:70px; left:50%; transform:translateX(-50%); background:var(--accent); color:var(--accent-ink); padding:8px 14px; font-size:11px; border:2px solid var(--border); box-shadow:3px 3px 0 var(--shadow); display:none; z-index:60; white-space:nowrap;}
+#inventory-strip{width:100%; max-width:340px; overflow-x:auto; display:flex; gap:8px; padding:6px 2px;}
+.inv-item{flex-shrink:0; text-align:center; background:var(--surface); border:2px solid var(--border); padding:4px; width:52px;}
+.inv-item .iname{font-size:8px; color:var(--muted); margin-top:2px; line-height:1.2;}
+
+/* ===== NOTES ===== */
+#notes-body{flex:1; display:flex; flex-direction:column; overflow:hidden;}
+#notes-list{flex:1; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:8px;}
+.note-card{background:var(--surface); border:2px solid var(--border); padding:14px 16px; cursor:pointer; box-shadow:3px 3px 0 var(--shadow); display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+.note-card .nc-title{font-weight:bold; font-size:15px;}
+.note-card .nc-prev{font-size:12.5px; color:var(--muted); margin-top:4px; max-height:36px; overflow:hidden;}
+.note-card .nc-star{background:none; border:none; font-size:18px; cursor:pointer; color:var(--muted); flex-shrink:0;}
+.note-card .nc-star.pinned{color:var(--accent);}
+#new-note-btn{position:absolute; bottom:20px; right:20px; width:50px; height:50px; border-radius:50%; border:3px solid var(--border); background:var(--accent); color:var(--accent-ink); font-size:24px; cursor:pointer; box-shadow:3px 3px 0 var(--shadow);}
+#empty-notes{text-align:center; color:var(--muted); font-size:12px; margin-top:40px;}
+#notes-toolbar{display:flex; gap:8px; padding:10px 12px 0;}
+#notes-search{flex:1; border:2px solid var(--border); background:var(--surface2); color:var(--text); padding:9px 10px; font-size:13px;}
+#folder-tabs{display:flex; gap:6px; padding:10px 12px 0; overflow-x:auto;}
+.folder-tab{flex-shrink:0; padding:6px 12px; border:2px solid var(--border); background:var(--surface2); color:var(--muted); font-size:11px; cursor:pointer; white-space:nowrap;}
+.folder-tab.active{background:var(--accent); color:var(--accent-ink); font-weight:bold;}
+
+/* Bite AI */
+#bite-log{flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px;}
+.bite-line{max-width:82%; padding:10px 13px; font-size:13.5px; line-height:1.5; border:2px solid var(--border);}
+.bite-line.user{align-self:flex-end; background:var(--accent); color:var(--accent-ink); font-weight:500;}
+.bite-line.model{align-self:flex-start; background:var(--surface2); color:var(--text);}
+.bite-line.system{align-self:center; background:transparent; color:var(--muted); font-style:italic; border:none; font-size:12px;}
+.bite-line.typing{align-self:flex-start; background:var(--surface2); color:var(--muted);}
+#bite-input-row{display:flex; gap:8px; padding:12px 14px; border-top:2px solid var(--border); background:var(--surface2);}
+#bite-input{flex:1; border:2px solid var(--border); background:var(--surface); color:var(--text); padding:10px 12px; font-size:14px; outline:none;}
+#bite-send-btn{border:2px solid var(--border); background:var(--accent); color:var(--accent-ink); font-weight:bold; padding:0 18px; cursor:pointer; box-shadow:2px 2px 0 var(--shadow);}
+#bite-send-btn:active{transform:translate(2px,2px); box-shadow:none;}
+#bite-send-btn:disabled{opacity:0.5; cursor:default;}
+#bite-stop-btn{border:2px solid var(--danger); background:var(--danger); color:#fff; font-weight:bold; padding:0 16px; cursor:pointer;}
+#bite-stop-btn:active{transform:translate(2px,2px);}
+.bite-line{position:relative;}
+.bite-copy-btn{display:block; margin-top:6px; background:none; border:none; color:var(--muted); font-size:11px; cursor:pointer; padding:0;}
+.bite-copy-btn:hover{color:var(--accent2);}
+#view-bite{display:none;}
+#view-bite.active{display:flex;}
+.toast{position:fixed; bottom:90px; left:50%; transform:translateX(-50%) translateY(8px); background:var(--surface); border:2px solid var(--border); box-shadow:3px 3px 0 var(--shadow); padding:10px 16px; font-size:12px; z-index:300; max-width:80%; text-align:center; opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0); pointer-events:auto;}
+.modal-overlay{position:fixed; inset:0; background:rgba(0,0,0,.55); display:none; align-items:center; justify-content:center; z-index:700;}
+.modal-overlay.show{display:flex;}
+.modal-box{background:var(--surface); border:3px solid var(--border); box-shadow:6px 6px 0 var(--shadow); padding:20px; max-width:280px; text-align:center;}
+.modal-box p{font-size:13px; margin:0 0 4px;}
+.modal-actions{display:flex; gap:10px; margin-top:14px;}
+.modal-actions button{flex:1; padding:10px; border:2px solid var(--border); cursor:pointer; background:var(--surface2); color:var(--text); font-size:12px;}
+.modal-actions button.danger-btn{background:var(--danger); color:#fff; font-weight:bold;}
+.acc-row input.rename-input{width:110px; font-size:13px; border:2px solid var(--border); background:var(--surface2); color:var(--text); padding:3px 4px;}
+
+/* note editor */
+#editor{flex:1; display:none; flex-direction:column;}
+#editor.active{display:flex;}
+#editor-title{width:100%; border:none; border-bottom:2px solid var(--border); background:transparent; color:var(--text); font-size:16px; font-weight:bold; padding:10px 14px; outline:none;}
+.editor-tabs{display:flex; border-bottom:2px solid var(--border);}
+.editor-tab{flex:1; text-align:center; padding:8px; font-size:12px; cursor:pointer; color:var(--muted);}
+.editor-tab.active{color:var(--text); font-weight:bold; border-bottom:3px solid var(--accent); margin-bottom:-2px;}
+.editor-toolbar{display:flex; flex-wrap:wrap; gap:6px; padding:8px 10px; border-bottom:2px solid var(--border); background:var(--surface2);}
+.tb-btn{border:2px solid var(--border); background:var(--surface); width:32px; height:32px; cursor:pointer; font-size:13px; display:flex; align-items:center; justify-content:center; padding:0;}
+.tb-btn.active-fmt{background:var(--accent); color:var(--accent-ink);}
+#text-pane{flex:1; padding:14px; outline:none; overflow-y:auto; font-size:14px; line-height:1.5;}
+#draw-pane{flex:1; display:none; flex-direction:column; align-items:center; padding:10px; gap:8px; overflow-y:auto;}
+#draw-pane.active{display:flex;}
+#draw-canvas{border:2px solid var(--border); background:#fff; touch-action:none; max-width:100%; flex-shrink:0;}
+.brush-row{display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:center;}
+.brush-size{width:30px; height:30px; border:2px solid var(--border); background:var(--surface); cursor:pointer; display:flex; align-items:center; justify-content:center;}
+.brush-size.active{background:var(--accent);}
+.brush-size .dot{background:var(--text); border-radius:50%;}
+.swatch{width:24px; height:24px; border:2px solid var(--border); cursor:pointer;}
+.swatch.active{outline:2px solid var(--accent); outline-offset:1px;}
+#editor-footer{display:flex; gap:8px; padding:10px 14px; border-top:2px solid var(--border); flex-wrap:wrap;}
+#editor-footer button{flex:1; min-width:80px; padding:10px 6px; border:2px solid var(--border); background:var(--surface); box-shadow:2px 2px 0 var(--shadow); font-size:11px; cursor:pointer;}
+#editor-footer button:active{transform:translate(2px,2px); box-shadow:none;}
+#editor-footer button.danger{color:var(--danger);}
+#editor-footer button.primary{background:var(--accent); color:var(--accent-ink); font-weight:bold;}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div id="topbar">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button class="icon-btn" id="menu-btn" title="Menu">☰</button>
+      <div class="brand"><img id="logo-mark" src="favicon.png" alt="TriBite logo"><h1 class="pixel-font">TRIBITE</h1></div>
+    </div>
+    <div class="controls">
+      <button class="icon-btn" id="theme-btn" title="Theme">◐</button>
+      <button class="icon-btn" id="acc-btn" title="Account">👤</button>
+      <div class="dropdown" id="theme-dropdown">
+        <h4>Theme</h4>
+        <div class="theme-row">
+          <div class="theme-opt" data-theme="light">Light</div>
+          <div class="theme-opt" data-theme="dark">Dark</div>
+          <div class="theme-opt" data-theme="system">System</div>
+        </div>
+      </div>
+      <div class="dropdown" id="acc-dropdown">
+        <h4>Accounts</h4>
+        <div id="acc-list"></div>
+      </div>
+      <input type="file" id="avatar-input" accept="image/*" style="display:none;">
+    </div>
+  </div>
+
+  <div id="drawer-overlay">
+    <div id="drawer">
+      <div class="drawer-header">
+        <h2 class="pixel-font" style="font-size:12px;">MENU</h2>
+        <button class="icon-btn" id="drawer-close">✕</button>
+      </div>
+      <div class="drawer-content" id="drawer-content"></div>
+      <div class="drawer-footer">
+        <div class="drawer-tagline">— CALCULATE. PLAY. WRITE. —</div>
+        <div class="drawer-version">v1.4.0</div>
+        <div class="drawer-credit">Made with ❤️ by <span class="accent-text">HIM</span></div>
+        <div class="drawer-copy">© 2026 TriBite by HIMworks. All rights reserved.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="doom-overlay">
+    <div id="doom-text">SORRY IMBECILE ONE...</div>
+    <button id="doom-escape-btn">Change account name</button>
+  </div>
+
+  <!-- HOME -->
+  <div id="home">
+    <div class="tile" id="tile-calc"><canvas width="40" height="40"></canvas>
+      <div><div class="label">Calculate It.</div><div class="sub">arithmetic, roots &amp; π</div></div></div>
+    <div class="tile" id="tile-game"><canvas width="40" height="40"></canvas>
+      <div><div class="label">Play.</div><div class="sub">pixel runner — chase coins</div></div></div>
+    <div class="tile" id="tile-notes"><canvas width="40" height="40"></canvas>
+      <div><div class="label">Take Notes.</div><div class="sub">write, sketch, export</div></div></div>
+    <div class="tile" id="tile-bite"><canvas width="40" height="40"></canvas>
+      <div><div class="label">biteAI</div><div class="sub">ask anything</div></div></div>
+  </div>
+
+  <!-- CALCULATOR -->
+  <div class="view" id="view-calc">
+    <div class="view-header"><button class="back-btn" data-back>←</button><h2 class="pixel-font">CALCULATE IT.</h2></div>
+    <div class="calc-toolbar">
+      <button id="history-open-btn" class="tb-btn" style="width:auto;padding:0 10px;font-size:11px;">History</button>
+      <button id="convert-open-btn" class="tb-btn" style="width:auto;padding:0 10px;font-size:11px;">Convert</button>
+      <button id="poly-open-btn" class="tb-btn" style="width:auto;padding:0 10px;font-size:11px;">Poly ƒ(x)</button>
+    </div>
+    <div id="calc-body">
+      <div id="calc-display">
+        <div id="calc-expr"></div>
+        <div id="calc-current">0</div>
+      </div>
+      <div id="calc-msg"></div>
+      <div class="calc-grid">
+        <button class="calc-key fn" data-k="sin">sin</button>
+        <button class="calc-key fn" data-k="cos">cos</button>
+        <button class="calc-key fn" data-k="tan">tan</button>
+        <button class="calc-key fn" data-k="lparen">(</button>
+
+        <button class="calc-key fn" data-k="log">log</button>
+        <button class="calc-key fn" data-k="ln">ln</button>
+        <button class="calc-key fn" data-k="rparen">)</button>
+        <button class="calc-key fn" data-k="fact">!</button>
+
+        <button class="calc-key fn" data-k="sqrt">√</button>
+        <button class="calc-key fn" data-k="cbrt">∛</button>
+        <button class="calc-key fn" data-k="pi">π</button>
+        <button class="calc-key fn" data-k="e">e</button>
+
+        <button class="calc-key fn" data-k="ac">AC</button>
+        <button class="calc-key fn" data-k="back">⌫</button>
+        <button class="calc-key fn" data-k="pct">%</button>
+        <button class="calc-key op" data-k="div">÷</button>
+
+        <button class="calc-key num" data-k="7">7</button>
+        <button class="calc-key num" data-k="8">8</button>
+        <button class="calc-key num" data-k="9">9</button>
+        <button class="calc-key op" data-k="mul">×</button>
+
+        <button class="calc-key num" data-k="4">4</button>
+        <button class="calc-key num" data-k="5">5</button>
+        <button class="calc-key num" data-k="6">6</button>
+        <button class="calc-key op" data-k="sub">−</button>
+
+        <button class="calc-key num" data-k="1">1</button>
+        <button class="calc-key num" data-k="2">2</button>
+        <button class="calc-key num" data-k="3">3</button>
+        <button class="calc-key op" data-k="add">+</button>
+
+        <button class="calc-key fn" data-k="sign">±</button>
+        <button class="calc-key num" data-k="0">0</button>
+        <button class="calc-key num" data-k="dot">.</button>
+        <button class="calc-key eq" data-k="eq" style="grid-column:span 1;">=</button>
+      </div>
+      <button id="angle-mode-btn" class="tb-btn" style="width:100%;">DEG</button>
+    </div>
+    <div id="poly-panel">
+      <div class="view-header" style="border:none; padding:0 0 10px;">
+        <button class="back-btn" id="poly-close-btn">←</button>
+        <h2 class="pixel-font" style="font-size:11px;">POLYNOMIAL SOLVER</h2>
+      </div>
+      <select id="poly-degree">
+        <option value="1">Linear — ax + b = 0</option>
+        <option value="2" selected>Quadratic — ax² + bx + c = 0</option>
+        <option value="3">Cubic — ax³ + bx² + cx + d = 0</option>
+      </select>
+      <div id="poly-inputs"></div>
+      <button type="button" id="poly-sqrt-btn" class="tb-btn" style="width:auto; padding:0 12px; align-self:flex-start;">Insert √</button>
+      <button id="poly-solve-btn" class="calc-key eq" style="width:100%;">Solve</button>
+      <div class="poly-section-label">Roots</div>
+      <div id="poly-result"></div>
+      <div class="poly-section-label">Steps</div>
+      <div id="poly-steps"></div>
+    </div>
+    <div id="history-panel">
+      <div class="view-header" style="border:none; padding:0 0 10px;">
+        <button class="back-btn" id="history-close-btn">←</button>
+        <h2 class="pixel-font" style="font-size:11px;">HISTORY</h2>
+        <button id="history-clear-btn" class="tb-btn" style="width:auto;padding:0 10px;margin-left:auto;font-size:11px;">Clear</button>
+      </div>
+      <div id="history-list"></div>
+    </div>
+    <div id="convert-panel">
+      <div class="view-header" style="border:none; padding:0 0 10px;">
+        <button class="back-btn" id="convert-close-btn">←</button>
+        <h2 class="pixel-font" style="font-size:11px;">UNIT CONVERTER</h2>
+      </div>
+      <select id="convert-category">
+        <option value="length">Length</option>
+        <option value="mass">Weight / Mass</option>
+        <option value="temp">Temperature</option>
+        <option value="volume">Volume</option>
+        <option value="speed">Speed</option>
+      </select>
+      <div class="convert-row">
+        <input id="convert-from-val" type="number" value="1">
+        <select id="convert-from-unit"></select>
+      </div>
+      <div class="convert-arrow">↓</div>
+      <div class="convert-row">
+        <input id="convert-to-val" type="text" readonly>
+        <select id="convert-to-unit"></select>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME -->
+  <div class="view" id="view-game">
+    <div class="view-header"><button class="back-btn" data-back>←</button><h2 class="pixel-font">PLAY.</h2>
+      <button id="shop-open-btn" class="tb-btn" style="width:auto;padding:0 10px;font-size:11px;margin-left:auto;">Shop</button>
+      <button id="ach-open-btn" class="tb-btn" style="width:auto;padding:0 10px;font-size:11px;">🏆</button>
+    </div>
+    <div id="game-body" style="position:relative;">
+      <div id="game-hud">
+        <span id="hud-coins">Coins: 0</span><span id="hud-score">Score: 0</span><span id="hud-best">Best: 0</span>
+      </div>
+      <div id="hud-level-row">
+        <span id="hud-level">Lv. 1</span>
+        <div id="hud-level-bar"><div id="hud-level-fill"></div></div>
+      </div>
+      <div style="position:relative;">
+        <canvas id="game-canvas" width="300" height="440"></canvas>
+        <div id="collect-toast"></div>
+        <div id="game-overlay">
+          <div class="pixel-font" style="font-size:14px;" id="overlay-title">READY?</div>
+          <div id="overlay-sub" style="font-size:12px;"></div>
+          <button id="overlay-btn">Start</button>
+        </div>
+      </div>
+      <div id="game-controls">
+        <div class="game-btn" id="btn-left">◀</div>
+        <div class="game-btn" id="btn-jump">▲</div>
+        <div class="game-btn" id="btn-right">▶</div>
+      </div>
+      <div id="inventory-strip"></div>
+    </div>
+    <div id="shop-panel">
+      <div class="view-header" style="border:none; padding:0 0 10px;">
+        <button class="back-btn" id="shop-close-btn">←</button>
+        <h2 class="pixel-font" style="font-size:11px;">COIN SHOP</h2>
+        <span id="shop-coin-balance" style="margin-left:auto; font-size:12px; color:var(--accent);"></span>
+      </div>
+      <div class="shop-tabs">
+        <div class="shop-tab active" data-shoptab="themes">Themes</div>
+        <div class="shop-tab" data-shoptab="skins">Skins</div>
+      </div>
+      <div id="shop-themes-list" class="shop-list"></div>
+      <div id="shop-skins-list" class="shop-list" style="display:none;"></div>
+    </div>
+    <div id="ach-panel">
+      <div class="view-header" style="border:none; padding:0 0 10px;">
+        <button class="back-btn" id="ach-close-btn">←</button>
+        <h2 class="pixel-font" style="font-size:11px;">ACHIEVEMENTS</h2>
+      </div>
+      <div id="ach-list"></div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="view" id="view-notes">
+    <div class="view-header"><button class="back-btn" data-back>←</button><h2 class="pixel-font">TAKE NOTES.</h2></div>
+    <div id="notes-body">
+      <div id="notes-toolbar">
+        <input id="notes-search" type="text" placeholder="🔍 Search notes...">
+        <button id="folder-manage-btn" class="tb-btn" style="width:auto;padding:0 10px;font-size:11px;">+ Folder</button>
+      </div>
+      <div id="folder-tabs"></div>
+      <div id="notes-list"></div>
+    </div>
+    <button id="new-note-btn">+</button>
+
+    <div id="editor">
+      <div class="view-header"><button class="back-btn" id="editor-back">←</button>
+        <input id="editor-title" placeholder="Untitled note"/>
+        <select id="editor-folder-select" style="width:auto; max-width:90px; font-size:11px; border:2px solid var(--border); background:var(--surface); color:var(--text);"></select>
+      </div>
+      <div class="editor-tabs">
+        <div class="editor-tab active" data-tab="text">Text</div>
+        <div class="editor-tab" data-tab="draw">Draw</div>
+      </div>
+      <div class="editor-toolbar" id="text-toolbar">
+        <button class="tb-btn" data-fmt="bold"><b>B</b></button>
+        <button class="tb-btn" data-fmt="italic"><i>I</i></button>
+        <button class="tb-btn" data-fmt="underline"><u>U</u></button>
+        <input type="color" id="font-color" value="#1c1e24" style="width:32px;height:32px;border:2px solid var(--border);padding:0;">
+        <select id="font-size" class="tb-btn" style="width:auto;">
+          <option value="2">Small</option>
+          <option value="3" selected>Normal</option>
+          <option value="4">Large</option>
+          <option value="5">X-Large</option>
+          <option value="7">Huge</option>
+        </select>
+        <button class="tb-btn" id="btn-copy" title="Copy">⧉</button>
+        <button class="tb-btn" id="btn-paste" title="Paste">📋</button>
+        <button class="tb-btn" id="btn-image" title="Attach image">📎</button>
+        <input type="file" id="image-input" accept="image/*" style="display:none;">
+      </div>
+      <div id="text-pane" contenteditable="true"></div>
+      <div id="draw-pane">
+        <canvas id="draw-canvas" width="300" height="900"></canvas>
+        <div class="brush-row" id="brush-sizes">
+          <div class="brush-size" data-size="2"><div class="dot" style="width:4px;height:4px;"></div></div>
+          <div class="brush-size active" data-size="5"><div class="dot" style="width:8px;height:8px;"></div></div>
+          <div class="brush-size" data-size="10"><div class="dot" style="width:14px;height:14px;"></div></div>
+          <button class="tb-btn" id="clear-draw" style="width:auto;padding:0 8px;">Clear</button>
+        </div>
+        <div class="brush-row" id="brush-colors"></div>
+      </div>
+      <div id="editor-footer">
+        <button id="btn-pin">☆ Pin</button>
+        <button id="btn-pdf">⇩ PDF</button>
+        <button class="danger" id="btn-delete">🗑 Delete</button>
+        <button class="primary" id="btn-save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BITE AI -->
+  <div class="view" id="view-bite">
+    <div class="view-header"><button class="back-btn" data-back>←</button><h2 class="pixel-font">biteAI</h2>
+      <label id="bite-stream-toggle" style="margin-left:auto; display:flex; align-items:center; gap:4px; font-size:10px; color:var(--muted);">
+        <input type="checkbox" id="bite-stream-checkbox"> Stream
+      </label>
+      <button id="bite-clear-btn" class="tb-btn" style="width:auto;padding:0 10px;font-size:11px;">Clear</button>
+    </div>
+    <div id="bite-log"></div>
+    <div id="bite-input-row">
+      <input id="bite-input" type="text" placeholder="ask anything..." autocomplete="off">
+      <button id="bite-stop-btn" style="display:none;">Stop</button>
+      <button id="bite-send-btn">Send</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <div id="confirm-modal" class="modal-overlay">
+    <div class="modal-box">
+      <p id="confirm-text"></p>
+      <div class="modal-actions">
+        <button id="confirm-no">Cancel</button>
+        <button id="confirm-yes" class="danger-btn">Delete</button>
+      </div>
+    </div>
+  </div>
+  <div id="pin-modal" class="modal-overlay">
+    <div class="modal-box">
+      <p id="pin-modal-text"></p>
+      <input type="password" id="pin-input" inputmode="numeric" maxlength="8" placeholder="PIN"
+        style="width:100%; padding:10px; border:2px solid var(--border); background:var(--surface2); color:var(--text); font-size:16px; text-align:center; letter-spacing:4px; margin-top:10px; box-sizing:border-box;">
+      <div class="modal-actions">
+        <button id="pin-cancel">Cancel</button>
+        <button id="pin-ok" class="danger-btn" style="background:var(--accent2);">OK</button>
+      </div>
+    </div>
+  </div>
+  <div id="paste-modal" class="modal-overlay">
+    <div class="modal-box">
+      <p>Long-press below and choose "Paste", then tap Insert.</p>
+      <textarea id="paste-textarea" rows="4"
+        style="width:100%; padding:8px; border:2px solid var(--border); background:var(--surface2); color:var(--text); font-size:14px; box-sizing:border-box; margin-top:8px; resize:vertical;"></textarea>
+      <div class="modal-actions">
+        <button id="paste-cancel">Cancel</button>
+        <button id="paste-insert" class="danger-btn" style="background:var(--accent2);">Insert</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===================== helpers: pixel art ===================== */
+function drawPixels(ctx, ox, oy, px, grid, palette){
+  for(let r=0;r<grid.length;r++){
+    const row = grid[r];
+    for(let c=0;c<row.length;c++){
+      const ch = row[c];
+      if(ch==='.'||ch===' ') continue;
+      ctx.fillStyle = palette[ch] || '#000';
+      ctx.fillRect(ox + c*px, oy + r*px, px, px);
+    }
+  }
+}
+function pixelCanvas(px, grid, palette, scale){
+  const c = document.createElement('canvas');
+  const w = grid[0].length*scale, h = grid.length*scale;
+  c.width=w; c.height=h;
+  const ctx = c.getContext('2d');
+  drawPixels(ctx,0,0,scale,grid,palette);
+  return c;
+}
+
+/* icon grids for home tiles */
+const ICON_CALC = ["kkkkkkkk","kwwwwwwk","kwoooowk","kwoooowk","kw.k.kwk","kwoooowk","kwoooowk","kkkkkkkk"];
+const PAL_CALC = {k:'#1c1e24', w:'#ffcf56', o:'#eef1f7'};
+const ICON_GAME = ["..kkkk..","kkwkkwk.","kkkkkkkk","..kkkk..","..kkkk..","kkkkkkkk","kkk..kkk",".kk..kk."];
+const PAL_GAME = {k:'#1c1e24'};
+const ICON_NOTES = ["kkkkkkk.","kwwwwwk.","kwwwwwk.",".kwwwwk.","..kwwk..","...kk...","..kkkk..","kkkkkkk."];
+const PAL_NOTES = {k:'#1c1e24', w:'#5fd4c7'};
+const ICON_BITE = [".kkkkk..","kkkkkkk.","kwkwkwk.","kkkkkkk.","kkkkkkk.","..kk....","........","........"];
+const PAL_BITE = {k:'#a78bfa', w:'#0d0f14'};
+
+function renderTileIcons(){
+  document.querySelectorAll('#tile-calc canvas')[0].replaceWith(pixelCanvas(5, ICON_CALC, PAL_CALC, 5));
+  document.querySelectorAll('#tile-game canvas')[0].replaceWith(pixelCanvas(5, ICON_GAME, PAL_GAME, 5));
+  document.querySelectorAll('#tile-notes canvas')[0].replaceWith(pixelCanvas(5, ICON_NOTES, PAL_NOTES, 5));
+  document.querySelectorAll('#tile-bite canvas')[0].replaceWith(pixelCanvas(5, ICON_BITE, PAL_BITE, 5));
+  document.querySelectorAll('#tile-calc canvas, #tile-game canvas, #tile-notes canvas, #tile-bite canvas').forEach(c=>{
+    c.style.imageRendering='pixelated';
+  });
+}
+
+/* logo mark: pixel "T" badge, used for the header logo and the favicon */
+const LOGO_GRID = ["kkkkkkkk","kkkkkkkk","...kk...","...kk...","...kk...","...kk...","...kk...","...kk..."];
+const LOGO_PAL = {k:'#ffffff'};
+function drawLogoIcon(ctx, size){
+  const unit = size/10;
+  ctx.fillStyle = '#3B9DFF';
+  ctx.fillRect(0,0,size,size);
+  drawPixels(ctx, unit, unit, unit, LOGO_GRID, LOGO_PAL);
+}
+function renderLogo(){
+  /* header logo is now a static image (favicon.png) — nothing to draw */
+}
+
+/* ===================== toast / confirm helpers ===================== */
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(()=> t.classList.remove('show'), 2400);
+}
+function askConfirm(msg, confirmLabel){
+  return new Promise(resolve=>{
+    const modal = document.getElementById('confirm-modal');
+    document.getElementById('confirm-text').textContent = msg;
+    document.getElementById('confirm-yes').textContent = confirmLabel || 'Delete';
+    modal.classList.add('show');
+    const yes = document.getElementById('confirm-yes'), no = document.getElementById('confirm-no');
+    function cleanup(v){
+      modal.classList.remove('show');
+      yes.removeEventListener('click', onYes);
+      no.removeEventListener('click', onNo);
+      resolve(v);
+    }
+    function onYes(){ cleanup(true); }
+    function onNo(){ cleanup(false); }
+    yes.addEventListener('click', onYes);
+    no.addEventListener('click', onNo);
+  });
+}
+
+/* ===================== storage (standalone-website safe) ===================== */
+const storage = {
+  async get(key){
+    try{
+      const v = localStorage.getItem(key);
+      return v===null ? null : { key, value:v };
+    }catch(e){ return null; }
+  },
+  async set(key, value){
+    try{
+      localStorage.setItem(key, value);
+      return { key, value };
+    }catch(e){ return null; }
+  },
+  async delete(key){
+    try{
+      localStorage.removeItem(key);
+      return { key, deleted:true };
+    }catch(e){ return null; }
+  }
+};
+
+/* ===================== theme ===================== */
+let themePref = 'system';
+let cosmicMode = false;
+let doomMode = false;
+let activeShopTheme = null;
+function applyTheme(){
+  if(cosmicMode){
+    document.documentElement.setAttribute('data-theme', 'cosmic');
+    document.querySelectorAll('.theme-opt').forEach(o=>o.classList.remove('active'));
+    return;
+  }
+  if(activeShopTheme){
+    document.documentElement.setAttribute('data-theme', 'theme-'+activeShopTheme);
+    document.querySelectorAll('.theme-opt').forEach(o=>o.classList.remove('active'));
+    return;
+  }
+  const mode = themePref==='system'
+    ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light')
+    : themePref;
+  document.documentElement.setAttribute('data-theme', mode);
+  document.querySelectorAll('.theme-opt').forEach(o=>o.classList.toggle('active', o.dataset.theme===themePref));
+}
+function updateSpecialModes(){
+  const acc = accounts[currentAccount];
+  const name = (acc && acc.name) ? acc.name.trim() : '';
+  const isHim = name === 'HIM.';
+  const isDoom = name === 'LingChe0.';
+  if(isDoom !== doomMode){
+    doomMode = isDoom;
+    document.getElementById('doom-overlay').style.display = doomMode ? 'flex' : 'none';
+  }
+  if(isHim !== cosmicMode){
+    cosmicMode = isHim;
+    applyTheme();
+  }
+}
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ()=>{ if(themePref==='system') applyTheme(); });
+document.getElementById('doom-escape-btn').addEventListener('click', async ()=>{
+  const val = await askInput('Rename this account to leave:', {type:'text', value:accounts[currentAccount].name, okLabel:'Save'});
+  if(val===null) return;
+  const v = val.trim();
+  if(v) accounts[currentAccount].name = v;
+  saveAccountsMeta();
+  renderAccountList();
+  updateSpecialModes();
+});
+
+async function loadTheme(){
+  try{
+    const r = await storage.get('theme-pref');
+    if(r && r.value) themePref = r.value;
+  }catch(e){}
+  applyTheme();
+}
+async function saveTheme(){
+  try{ await storage.set('theme-pref', themePref); }catch(e){}
+}
+
+/* ===================== accounts ===================== */
+let accounts = { acc1:{name:'Account 1'}, acc2:{name:'Account 2'}, acc3:{name:'Account 3'} };
+let currentAccount = 'acc1';
+
+async function loadAccounts(){
+  try{
+    const r = await storage.get('accounts-meta');
+    if(r && r.value) accounts = JSON.parse(r.value);
+  }catch(e){}
+  try{
+    const r2 = await storage.get('current-account');
+    if(r2 && r2.value) currentAccount = r2.value;
+  }catch(e){}
+  renderAccountList();
+  updateSpecialModes();
+}
+async function saveAccountsMeta(){
+  try{ await storage.set('accounts-meta', JSON.stringify(accounts)); }catch(e){}
+}
+function askInput(promptText, opts={}){
+  return new Promise(resolve=>{
+    const modal = document.getElementById('pin-modal');
+    document.getElementById('pin-modal-text').textContent = promptText;
+    const input = document.getElementById('pin-input');
+    input.value = opts.value || '';
+    input.type = opts.type || 'password';
+    document.getElementById('pin-ok').textContent = opts.okLabel || 'OK';
+    modal.classList.add('show');
+    setTimeout(()=> input.focus(), 50);
+    const yes = document.getElementById('pin-ok'), no = document.getElementById('pin-cancel');
+    function cleanup(v){
+      modal.classList.remove('show');
+      yes.removeEventListener('click', onYes);
+      no.removeEventListener('click', onNo);
+      input.removeEventListener('keydown', onKey);
+      resolve(v);
+    }
+    function onYes(){ cleanup(input.value); }
+    function onNo(){ cleanup(null); }
+    function onKey(e){ if(e.key==='Enter'){ e.preventDefault(); cleanup(input.value); } }
+    yes.addEventListener('click', onYes);
+    no.addEventListener('click', onNo);
+    input.addEventListener('keydown', onKey);
+  });
+}
+async function attemptSwitchAccount(id){
+  const acc = accounts[id];
+  if(acc.pin){
+    const entered = await askInput(`Enter PIN for ${acc.name}`, {type:'password', okLabel:'Unlock'});
+    if(entered === null) return;
+    if(entered !== acc.pin){ showToast('Incorrect PIN'); return; }
+  }
+  await switchAccount(id);
+}
+async function switchAccount(id){
+  currentAccount = id;
+  try{ await storage.set('current-account', id); }catch(e){}
+  renderAccountList();
+  updateSpecialModes();
+  await loadNotesForAccount();
+  await loadGameDataForAccount();
+  await loadBiteHistoryForAccount();
+  await loadCalcHistoryForAccount();
+  document.getElementById('acc-dropdown').classList.remove('open');
+}
+function renderAccountList(){
+  const list = document.getElementById('acc-list');
+  list.innerHTML='';
+  Object.keys(accounts).forEach(id=>{
+    const row = document.createElement('div');
+    row.className = 'acc-row' + (id===currentAccount?' active':'');
+    const avatarHtml = accounts[id].avatar
+      ? `<img src="${accounts[id].avatar}" class="acc-avatar" data-avatar="${id}">`
+      : `<div class="acc-avatar acc-avatar-placeholder" data-avatar="${id}">👤</div>`;
+    row.innerHTML = `${avatarHtml}<span class="name">${accounts[id].name}</span><div style="display:flex; gap:6px;"><button data-pin="${id}" title="Set PIN lock">${accounts[id].pin?'🔒':'🔓'}</button><button data-rename="${id}">rename</button></div>`;
+    row.addEventListener('click',(e)=>{
+      if(e.target.tagName==='INPUT' || e.target.tagName==='BUTTON') return;
+      if(e.target.dataset.avatar) return;
+      attemptSwitchAccount(id);
+    });
+    row.querySelector('[data-avatar]').addEventListener('click', (e)=>{
+      e.stopPropagation();
+      pendingAvatarAccountId = id;
+      document.getElementById('avatar-input').click();
+    });
+    row.querySelector('[data-rename]').addEventListener('click',(e)=>{
+      e.stopPropagation();
+      const nameSpan = row.querySelector('.name');
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.className = 'rename-input';
+      input.value = accounts[id].name;
+      nameSpan.replaceWith(input);
+      input.focus();
+      input.select();
+      let committed = false;
+      function commit(){
+        if(committed) return;
+        committed = true;
+        const v = input.value.trim();
+        if(v) accounts[id].name = v;
+        saveAccountsMeta();
+        renderAccountList();
+        updateSpecialModes();
+      }
+      input.addEventListener('keydown', ev=>{
+        if(ev.key==='Enter'){ ev.preventDefault(); commit(); }
+        if(ev.key==='Escape'){ committed=true; renderAccountList(); }
+      });
+      input.addEventListener('blur', commit);
+    });
+    row.querySelector('[data-pin]').addEventListener('click', async (e)=>{
+      e.stopPropagation();
+      const val = await askInput(`Set a PIN for ${accounts[id].name} (leave blank to remove the lock)`, {type:'text', value: accounts[id].pin||'', okLabel:'Save'});
+      if(val === null) return;
+      accounts[id].pin = val.trim() === '' ? null : val.trim();
+      saveAccountsMeta();
+      renderAccountList();
+      showToast(accounts[id].pin ? 'PIN set.' : 'PIN removed.');
+    });
+    list.appendChild(row);
+  });
+  renderAccBtnAvatar();
+}
+let pendingAvatarAccountId = null;
+function renderAccBtnAvatar(){
+  const btn = document.getElementById('acc-btn');
+  const acc = accounts[currentAccount];
+  if(acc && acc.avatar){
+    btn.innerHTML = `<img src="${acc.avatar}" class="acc-btn-avatar">`;
+  } else {
+    btn.innerHTML = '👤';
+  }
+}
+document.getElementById('avatar-input').addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if(!file || !pendingAvatarAccountId) return;
+  const reader = new FileReader();
+  reader.onload = (ev)=>{
+    const img = new Image();
+    img.onload = ()=>{
+      const size = 128;
+      const canvas = document.createElement('canvas');
+      canvas.width = size; canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      const scale = Math.max(size/img.width, size/img.height);
+      const w = img.width*scale, h = img.height*scale;
+      ctx.drawImage(img, (size-w)/2, (size-h)/2, w, h);
+      accounts[pendingAvatarAccountId].avatar = canvas.toDataURL('image/jpeg', 0.85);
+      saveAccountsMeta();
+      renderAccountList();
+    };
+    img.onerror = ()=> showToast('Could not read that image.');
+    img.src = ev.target.result;
+  };
+  reader.onerror = ()=> showToast('Could not read that image.');
+  reader.readAsDataURL(file);
+  e.target.value = '';
+});
+
+/* ===================== navigation ===================== */
+function showView(name){
+  document.getElementById('home').style.display = name==='home' ? 'flex':'none';
+  ['calc','game','notes','bite'].forEach(v=>{
+    document.getElementById('view-'+v).classList.toggle('active', v===name);
+  });
+  if(name==='game') startGameLoopIfNeeded();
+  if(name==='bite') document.getElementById('bite-input').focus();
+}
+document.getElementById('tile-calc').addEventListener('click', ()=>showView('calc'));
+document.getElementById('tile-game').addEventListener('click', ()=>showView('game'));
+document.getElementById('tile-notes').addEventListener('click', ()=>showView('notes'));
+document.getElementById('tile-bite').addEventListener('click', ()=>showView('bite'));
+document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click', ()=>{
+  pauseGame();
+  showView('home');
+}));
+
+document.getElementById('theme-btn').addEventListener('click', ()=>{
+  document.getElementById('acc-dropdown').classList.remove('open');
+  document.getElementById('theme-dropdown').classList.toggle('open');
+});
+document.getElementById('acc-btn').addEventListener('click', ()=>{
+  document.getElementById('theme-dropdown').classList.remove('open');
+  document.getElementById('acc-dropdown').classList.toggle('open');
+});
+document.querySelectorAll('.theme-opt').forEach(o=>o.addEventListener('click', ()=>{
+  themePref = o.dataset.theme; activeShopTheme = null; saveGameData(); applyTheme(); saveTheme();
+}));
+document.addEventListener('click', (e)=>{
+  if(!e.target.closest('.controls')){
+    document.getElementById('theme-dropdown').classList.remove('open');
+    document.getElementById('acc-dropdown').classList.remove('open');
+  }
+});
+
+/* ===================== CALCULATOR ===================== */
+const MAX_DIGITS = 20, MAX_DECIMALS = 20, MAX_OPS = 15;
+let calc = { tokens:[], parenDepth:0, justEvaluated:false, angleMode:'deg', history:'' };
+
+function calcMsg(t){ document.getElementById('calc-msg').textContent = t||''; }
+
+function formatNumber(n){
+  if(!isFinite(n)) return 'Error';
+  let s;
+  if (Number.isInteger(n)) { s = n.toString(); }
+  else {
+    s = n.toFixed(MAX_DECIMALS);
+    s = s.replace(/0+$/,'').replace(/\.$/,'');
+  }
+  const digitCount = s.replace('-','').replace('.','').length;
+  if(digitCount > MAX_DIGITS){
+    s = n.toPrecision(MAX_DIGITS);
+    s = parseFloat(s).toString();
+  }
+  return s;
+}
+
+const FUNC_LABEL = { sin:'sin', cos:'cos', tan:'tan', log:'log', ln:'ln', sqrt:'√', cbrt:'∛' };
+function tokenDisplay(t){
+  switch(t.type){
+    case 'num': return t.value;
+    case 'op': return {'add':'+','sub':'−','mul':'×','div':'÷'}[t.value];
+    case 'lparen': return '(';
+    case 'rparen': return ')';
+    case 'func': return FUNC_LABEL[t.value] + '(';
+    case 'const': return t.display;
+    case 'fact': return '!';
+    case 'pct': return '%';
+  }
+}
+function renderExprString(tokens){ return tokens.map(tokenDisplay).join('') || '0'; }
+
+function refreshCalcDisplay(){
+  document.getElementById('calc-current').textContent = renderExprString(calc.tokens);
+  document.getElementById('calc-expr').textContent = calc.history || '';
+}
+
+function opCount(){ return calc.tokens.filter(t=>t.type==='op').length; }
+
+function inputDigit(d){
+  if(calc.justEvaluated){ calc = { tokens:[], parenDepth:0, justEvaluated:false, angleMode:calc.angleMode, history:'' }; calcMsg(''); }
+  const last = calc.tokens[calc.tokens.length-1];
+  if(last && last.type==='num'){
+    const rawDigits = last.value.replace('-','').replace('.','');
+    if(rawDigits.length >= MAX_DIGITS){ calcMsg('20-digit limit reached'); return; }
+    last.value += d;
+  } else {
+    calc.tokens.push({type:'num', value:d});
+  }
+}
+function inputDot(){
+  if(calc.justEvaluated){ calc = { tokens:[], parenDepth:0, justEvaluated:false, angleMode:calc.angleMode, history:'' }; }
+  const last = calc.tokens[calc.tokens.length-1];
+  if(last && last.type==='num'){
+    if(!last.value.includes('.')) last.value += '.';
+  } else {
+    calc.tokens.push({type:'num', value:'0.'});
+  }
+}
+function inputSign(){
+  const last = calc.tokens[calc.tokens.length-1];
+  if(last && last.type==='num'){
+    last.value = last.value.startsWith('-') ? last.value.slice(1) : '-'+last.value;
+  }
+}
+function backspace(){
+  if(calc.justEvaluated){ calc = { tokens:[], parenDepth:0, justEvaluated:false, angleMode:calc.angleMode, history:'' }; return; }
+  const last = calc.tokens[calc.tokens.length-1];
+  if(!last) return;
+  if(last.type==='num' && last.value.length>1){ last.value = last.value.slice(0,-1); }
+  else {
+    if(last.type==='lparen') calc.parenDepth--;
+    if(last.type==='rparen') calc.parenDepth++;
+    calc.tokens.pop();
+  }
+}
+function clearAll(){
+  calc = { tokens:[], parenDepth:0, justEvaluated:false, angleMode:calc.angleMode, history:'' };
+  calcMsg('');
+}
+function pushOp(op){
+  if(opCount() >= MAX_OPS){ calcMsg('15-operation limit reached — press ='); return; }
+  if(calc.justEvaluated) calc.justEvaluated = false;
+  const last = calc.tokens[calc.tokens.length-1];
+  if(!last){
+    if(op==='sub') calc.tokens.push({type:'op', value:'sub'});
+    return;
+  }
+  if(last.type==='op'){ last.value = op; return; }
+  if(last.type==='func' || last.type==='lparen') return;
+  calc.tokens.push({type:'op', value:op});
+}
+function pushFunc(name){
+  if(calc.justEvaluated){ calc = { tokens:[], parenDepth:0, justEvaluated:false, angleMode:calc.angleMode, history:'' }; }
+  calc.tokens.push({type:'func', value:name});
+  calc.parenDepth++;
+}
+function pushLparen(){
+  if(calc.justEvaluated){ calc = { tokens:[], parenDepth:0, justEvaluated:false, angleMode:calc.angleMode, history:'' }; }
+  calc.tokens.push({type:'lparen'});
+  calc.parenDepth++;
+}
+function pushRparen(){
+  if(calc.parenDepth <= 0) return;
+  const last = calc.tokens[calc.tokens.length-1];
+  if(!last || last.type==='op' || last.type==='lparen' || last.type==='func') return;
+  calc.tokens.push({type:'rparen'});
+  calc.parenDepth--;
+}
+function pushConst(name){
+  if(calc.justEvaluated){ calc = { tokens:[], parenDepth:0, justEvaluated:false, angleMode:calc.angleMode, history:'' }; }
+  calc.tokens.push({type:'const', value:name==='pi'?Math.PI:Math.E, display:name==='pi'?'π':'e'});
+}
+function pushFact(){
+  const last = calc.tokens[calc.tokens.length-1];
+  if(!last || !['num','const','rparen','fact'].includes(last.type)) return;
+  calc.tokens.push({type:'fact'});
+}
+function pushPct(){
+  const last = calc.tokens[calc.tokens.length-1];
+  if(!last || !['num','const','rparen'].includes(last.type)) return;
+  calc.tokens.push({type:'pct'});
+}
+function factorialOf(n){
+  if(n<0 || !Number.isInteger(n)) return NaN;
+  if(n>170) return Infinity;
+  let r=1; for(let i=2;i<=n;i++) r*=i;
+  return r;
+}
+function trigInput(x){ return calc.angleMode==='deg' ? x*Math.PI/180 : x; }
+function applyFunc(name, x){
+  switch(name){
+    case 'sin': return Math.sin(trigInput(x));
+    case 'cos': return Math.cos(trigInput(x));
+    case 'tan': return Math.tan(trigInput(x));
+    case 'log': return Math.log10(x);
+    case 'ln': return Math.log(x);
+    case 'sqrt': return Math.sqrt(x);
+    case 'cbrt': return Math.cbrt(x);
+  }
+}
+function evaluateTokens(tokens){
+  let pos = 0;
+  const peek = () => tokens[pos];
+  const advance = () => tokens[pos++];
+  function parseExpression(){
+    let value = parseTerm();
+    while(peek() && peek().type==='op' && (peek().value==='add'||peek().value==='sub')){
+      const op = advance().value;
+      const rhs = parseTerm();
+      value = op==='add' ? value+rhs : value-rhs;
+    }
+    return value;
+  }
+  function parseTerm(){
+    let value = parseUnary();
+    while(peek() && peek().type==='op' && (peek().value==='mul'||peek().value==='div')){
+      const op = advance().value;
+      const rhs = parseUnary();
+      value = op==='mul' ? value*rhs : value/rhs;
+    }
+    return value;
+  }
+  function parseUnary(){
+    if(peek() && peek().type==='op' && peek().value==='sub'){
+      advance();
+      return -parseUnary();
+    }
+    return parsePostfix();
+  }
+  function parsePostfix(){
+    let value = parsePrimary();
+    while(peek() && (peek().type==='fact' || peek().type==='pct')){
+      const t = advance();
+      value = t.type==='fact' ? factorialOf(value) : value/100;
+    }
+    return value;
+  }
+  function parsePrimary(){
+    const t = peek();
+    if(!t) throw new Error('Incomplete expression');
+    if(t.type==='num'){ advance(); return parseFloat(t.value); }
+    if(t.type==='const'){ advance(); return t.value; }
+    if(t.type==='lparen'){
+      advance();
+      const v = parseExpression();
+      if(peek() && peek().type==='rparen') advance();
+      return v;
+    }
+    if(t.type==='func'){
+      advance();
+      const v = parseExpression();
+      if(peek() && peek().type==='rparen') advance();
+      return applyFunc(t.value, v);
+    }
+    throw new Error('Unexpected token');
+  }
+  return parseExpression();
+}
+function evaluate(){
+  if(calc.tokens.length===0) return;
+  const tokens = calc.tokens.map(t=>({...t}));
+  let depth = calc.parenDepth;
+  while(depth > 0){ tokens.push({type:'rparen'}); depth--; }
+  try{
+    const val = evaluateTokens(tokens);
+    if(!isFinite(val) || Number.isNaN(val)) throw new Error('Math error');
+    const exprStr = renderExprString(tokens);
+    calc.history = exprStr + ' =';
+    calc.tokens = [{type:'num', value: formatNumber(val)}];
+    calc.parenDepth = 0;
+    calc.justEvaluated = true;
+    calcMsg('');
+    recordCalcHistory(exprStr, formatNumber(val));
+  }catch(err){
+    calcMsg('Error — check your expression');
+  }
+}
+
+document.querySelectorAll('.calc-key').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const k = btn.dataset.k;
+    if(/^[0-9]$/.test(k)) inputDigit(k);
+    else if(k==='dot') inputDot();
+    else if(k==='ac') clearAll();
+    else if(k==='back') backspace();
+    else if(k==='sign') inputSign();
+    else if(k==='pct') pushPct();
+    else if(k==='fact') pushFact();
+    else if(k==='lparen') pushLparen();
+    else if(k==='rparen') pushRparen();
+    else if(k==='pi') pushConst('pi');
+    else if(k==='e') pushConst('e');
+    else if(['sin','cos','tan','log','ln','sqrt','cbrt'].includes(k)) pushFunc(k);
+    else if(['add','sub','mul','div'].includes(k)) pushOp(k);
+    else if(k==='eq') evaluate();
+    refreshCalcDisplay();
+  });
+});
+document.getElementById('angle-mode-btn').addEventListener('click', ()=>{
+  calc.angleMode = calc.angleMode==='deg' ? 'rad' : 'deg';
+  document.getElementById('angle-mode-btn').textContent = calc.angleMode.toUpperCase();
+});
+
+/* ===================== CALC HISTORY ===================== */
+let calcHistoryLog = [];
+async function loadCalcHistoryForAccount(){
+  try{
+    const r = await storage.get('calchistory:'+currentAccount);
+    calcHistoryLog = r && r.value ? JSON.parse(r.value) : [];
+  }catch(e){ calcHistoryLog = []; }
+}
+async function saveCalcHistoryLog(){
+  try{ await storage.set('calchistory:'+currentAccount, JSON.stringify(calcHistoryLog)); }catch(e){}
+}
+function recordCalcHistory(expr, result){
+  calcHistoryLog.unshift({ expr, result, t: Date.now() });
+  if(calcHistoryLog.length > 50) calcHistoryLog = calcHistoryLog.slice(0, 50);
+  saveCalcHistoryLog();
+}
+function renderHistoryList(){
+  const list = document.getElementById('history-list');
+  list.innerHTML = '';
+  if(calcHistoryLog.length === 0){
+    list.innerHTML = '<div style="text-align:center;color:var(--muted);font-size:12px;margin-top:20px;">No calculations yet.</div>';
+    return;
+  }
+  calcHistoryLog.forEach(item=>{
+    const div = document.createElement('div');
+    div.className = 'history-item';
+    div.innerHTML = `<div class="h-expr">${item.expr} =</div><div class="h-result">${item.result}</div>`;
+    div.addEventListener('click', ()=>{
+      calc.tokens = [{ type:'num', value: item.result }];
+      calc.parenDepth = 0;
+      calc.justEvaluated = true;
+      refreshCalcDisplay();
+      document.getElementById('history-panel').classList.remove('active');
+      document.getElementById('calc-body').style.display = 'flex';
+    });
+    list.appendChild(div);
+  });
+}
+document.getElementById('history-open-btn').addEventListener('click', ()=>{
+  document.getElementById('calc-body').style.display = 'none';
+  document.getElementById('history-panel').classList.add('active');
+  renderHistoryList();
+});
+document.getElementById('history-close-btn').addEventListener('click', ()=>{
+  document.getElementById('history-panel').classList.remove('active');
+  document.getElementById('calc-body').style.display = 'flex';
+});
+document.getElementById('history-clear-btn').addEventListener('click', async ()=>{
+  const ok = await askConfirm('Clear all calculation history?', 'Clear');
+  if(!ok) return;
+  calcHistoryLog = [];
+  await saveCalcHistoryLog();
+  renderHistoryList();
+});
+
+/* ===================== UNIT CONVERTER ===================== */
+const CONVERT_UNITS = {
+  length: { m:1, km:1000, cm:0.01, mm:0.001, mi:1609.344, yd:0.9144, ft:0.3048, in:0.0254 },
+  mass: { kg:1, g:0.001, mg:0.000001, lb:0.45359237, oz:0.028349523125, t:1000 },
+  volume: { l:1, ml:0.001, 'gal (US)':3.785411784, qt:0.946352946, cup:0.2365882365, 'fl oz':0.0295735295625 },
+  speed: { 'm/s':1, 'km/h':0.277777778, mph:0.44704, knot:0.514444444 }
+};
+function convertTemp(value, from, to){
+  let celsius;
+  if(from==='C') celsius = value;
+  else if(from==='F') celsius = (value - 32) * 5/9;
+  else celsius = value - 273.15;
+  if(to==='C') return celsius;
+  if(to==='F') return celsius * 9/5 + 32;
+  return celsius + 273.15;
+}
+function populateConvertUnits(){
+  const cat = document.getElementById('convert-category').value;
+  const fromSel = document.getElementById('convert-from-unit');
+  const toSel = document.getElementById('convert-to-unit');
+  fromSel.innerHTML = ''; toSel.innerHTML = '';
+  const units = cat==='temp' ? ['C','F','K'] : Object.keys(CONVERT_UNITS[cat]);
+  units.forEach(u=>{
+    fromSel.innerHTML += `<option value="${u}">${u}</option>`;
+    toSel.innerHTML += `<option value="${u}">${u}</option>`;
+  });
+  if(units.length > 1) toSel.selectedIndex = 1;
+  runConversion();
+}
+function runConversion(){
+  const cat = document.getElementById('convert-category').value;
+  const fromU = document.getElementById('convert-from-unit').value;
+  const toU = document.getElementById('convert-to-unit').value;
+  const val = parseFloat(document.getElementById('convert-from-val').value);
+  const outEl = document.getElementById('convert-to-val');
+  if(isNaN(val)){ outEl.value = ''; return; }
+  let result;
+  if(cat==='temp'){
+    result = convertTemp(val, fromU, toU);
+  } else {
+    const table = CONVERT_UNITS[cat];
+    result = val * table[fromU] / table[toU];
+  }
+  outEl.value = fmtNum(result);
+}
+document.getElementById('convert-open-btn').addEventListener('click', ()=>{
+  document.getElementById('calc-body').style.display = 'none';
+  document.getElementById('convert-panel').classList.add('active');
+  populateConvertUnits();
+});
+document.getElementById('convert-close-btn').addEventListener('click', ()=>{
+  document.getElementById('convert-panel').classList.remove('active');
+  document.getElementById('calc-body').style.display = 'flex';
+});
+document.getElementById('convert-category').addEventListener('change', populateConvertUnits);
+document.getElementById('convert-from-unit').addEventListener('change', runConversion);
+document.getElementById('convert-to-unit').addEventListener('change', runConversion);
+document.getElementById('convert-from-val').addEventListener('input', runConversion);
+
+/* ===================== POLYNOMIAL SOLVER ===================== */
+function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+function toFractionRaw(value, maxDen){
+  maxDen = maxDen || 1000;
+  if(Number.isInteger(value)) return {num:value, den:1};
+  const sign = value<0 ? -1 : 1;
+  const x = Math.abs(value);
+  const tol = 1e-9 * Math.max(1, x);
+  let h0=0, h1=1, k0=1, k1=0, b=x;
+  for(let i=0;i<30;i++){
+    const a = Math.floor(b);
+    const h2 = a*h1+h0, k2 = a*k1+k0;
+    h0=h1; h1=h2; k0=k1; k1=k2;
+    if(k1>0 && Math.abs(x - h1/k1) < tol) break;
+    const frac = b - a;
+    if(frac < 1e-13 || k1 > maxDen) break;
+    b = 1/frac;
+  }
+  if(k1===0 || k1>maxDen || Math.abs(x - h1/k1) > tol) return null;
+  return {num: sign*h1, den:k1};
+}
+function toFraction(value){
+  if(Number.isInteger(value)) return value.toString();
+  const f = toFractionRaw(value);
+  if(!f) return null;
+  return f.num + '/' + f.den;
+}
+function simplifySqrt(n){
+  if(!Number.isInteger(n) || n < 0) return null;
+  if(n === 0) return {coef:0, rest:1};
+  let coef = 1, rest = n;
+  for(let i=2; i*i<=rest; i++){
+    while(rest % (i*i) === 0){ rest = rest/(i*i); coef *= i; }
+  }
+  return {coef, rest};
+}
+function gcdInt(a,b){ a=Math.abs(a); b=Math.abs(b); while(b){ [a,b] = [b, a%b]; } return a; }
+function toRadicalString(x){
+  if(Math.abs(x) < 1e-9) return null;
+  const sign = x<0 ? '-' : '';
+  const ax = Math.abs(x);
+  const sqFrac = toFractionRaw(ax*ax, 1000);
+  if(!sqFrac || sqFrac.num < 0) return null;
+  if(sqFrac.den === 1){
+    const s = simplifySqrt(sqFrac.num);
+    if(!s || s.rest === 1) return null;
+    const coefStr = s.coef===1 ? '' : s.coef.toString();
+    return `${sign}${coefStr}√${s.rest}`;
+  }
+  const n2 = sqFrac.num * sqFrac.den;
+  const s = simplifySqrt(n2);
+  if(!s || s.rest === 1) return null;
+  const g = gcdInt(s.coef, sqFrac.den) || 1;
+  const coef = s.coef / g, den = sqFrac.den / g;
+  const coefStr = coef===1 ? '' : coef.toString();
+  const denStr = den===1 ? '' : `/${den}`;
+  return `${sign}${coefStr}√${s.rest}${denStr}`;
+}
+function fmtNumExact(n){
+  if(Math.abs(n) < 1e-9) return '0';
+  if(Number.isInteger(n)) return n.toString();
+  const frac = toFraction(n);
+  if(frac !== null) return frac;
+  const rad = toRadicalString(n);
+  if(rad !== null) return rad;
+  return null;
+}
+function fmtNum(n){
+  if(Math.abs(n) < 1e-9) n = 0;
+  const exact = fmtNumExact(n);
+  if(exact !== null) return exact;
+  return parseFloat(n.toFixed(6)).toString();
+}
+function fmtRoot(r, i){
+  if(Math.abs(r.im) < 1e-9){
+    const direct = fmtNumExact(r.re);
+    if(direct !== null) return `x${i} = ${direct}`;
+    if(r.decomp){
+      const pStr = fmtNum(r.decomp.p);
+      const qAbs = Math.abs(r.decomp.q);
+      const qStr = fmtNumExact(qAbs) ?? fmtNum(qAbs);
+      const opSign = r.decomp.q >= 0 ? '+' : '-';
+      return `x${i} = ${pStr} ${opSign} ${qStr}`;
+    }
+    return `x${i} = ${fmtNum(r.re)}`;
+  }
+  return `x${i} = ${fmtNum(r.re)} ${r.im>=0?'+':'-'} ${fmtNum(Math.abs(r.im))} i`;
+}
+function solveLinear(a,b){
+  if(a===0) return null;
+  return [{re:-b/a, im:0}];
+}
+function solveQuadratic(a,b,c){
+  if(a===0){ const l = solveLinear(b,c); return l; }
+  const d = b*b - 4*a*c;
+  if(d >= 0){
+    const sd = Math.sqrt(d);
+    const p = -b/(2*a);
+    const q1 = sd/(2*a), q2 = -sd/(2*a);
+    return [{re:p+q1, im:0, decomp:{p, q:q1}}, {re:p+q2, im:0, decomp:{p, q:q2}}];
+  }
+  const sd = Math.sqrt(-d);
+  return [{re:-b/(2*a), im:sd/(2*a)}, {re:-b/(2*a), im:-sd/(2*a)}];
+}
+function solveCubic(a,b,c,d){
+  if(a===0) return solveQuadratic(b,c,d);
+  const B=b/a, C=c/a, D=d/a;
+  const p = C - (B*B)/3;
+  const q = (2*B*B*B)/27 - (B*C)/3 + D;
+  const shift = -B/3;
+  const disc = (q*q)/4 + (p*p*p)/27;
+  const roots = [];
+  if(disc > 1e-9){
+    const sq = Math.sqrt(disc);
+    const u = Math.cbrt(-q/2 + sq);
+    const v = Math.cbrt(-q/2 - sq);
+    const t = u+v;
+    roots.push({re:t+shift, im:0});
+    const re2 = -t/2 + shift;
+    const im2 = (Math.sqrt(3)/2)*(u-v);
+    roots.push({re:re2, im:im2});
+    roots.push({re:re2, im:-im2});
+  } else if(Math.abs(disc) <= 1e-9){
+    if(Math.abs(p)<1e-9 && Math.abs(q)<1e-9){
+      roots.push({re:shift,im:0},{re:shift,im:0},{re:shift,im:0});
+    } else {
+      const u = Math.cbrt(-q/2);
+      roots.push({re:2*u+shift, im:0});
+      roots.push({re:-u+shift, im:0});
+      roots.push({re:-u+shift, im:0});
+    }
+  } else {
+    const r = Math.sqrt(-(p*p*p)/27);
+    const phi = Math.acos(clamp(-q/(2*r), -1, 1));
+    const m = 2*Math.cbrt(r);
+    roots.push({re:m*Math.cos(phi/3)+shift, im:0});
+    roots.push({re:m*Math.cos((phi+2*Math.PI)/3)+shift, im:0});
+    roots.push({re:m*Math.cos((phi+4*Math.PI)/3)+shift, im:0});
+  }
+  return roots;
+}
+
+function stepsLinear(a,b){
+  const lines = [];
+  lines.push(`Equation: ${fmtNum(a)}x + ${fmtNum(b)} = 0`);
+  lines.push(`Move constant: ${fmtNum(a)}x = ${fmtNum(-b)}`);
+  lines.push(`Divide by ${fmtNum(a)}: x = ${fmtNum(-b)} / ${fmtNum(a)}`);
+  lines.push(`x = ${fmtNum(-b/a)}`);
+  return lines.join('\n');
+}
+function stepsQuadratic(a,b,c){
+  const lines = [];
+  lines.push(`Equation: ${fmtNum(a)}x² + ${fmtNum(b)}x + ${fmtNum(c)} = 0`);
+  const d = b*b - 4*a*c;
+  lines.push(`Discriminant: D = b² − 4ac = (${fmtNum(b)})² − 4(${fmtNum(a)})(${fmtNum(c)}) = ${fmtNum(d)}`);
+  if(d >= 0){
+    const sd = Math.sqrt(d);
+    lines.push(`D ≥ 0, so both roots are real: x = (−b ± √D) / (2a)`);
+    lines.push(`√D = ${fmtNum(sd)}`);
+    lines.push(`x1 = (${fmtNum(-b)} + ${fmtNum(sd)}) / ${fmtNum(2*a)} = ${fmtNum((-b+sd)/(2*a))}`);
+    lines.push(`x2 = (${fmtNum(-b)} − ${fmtNum(sd)}) / ${fmtNum(2*a)} = ${fmtNum((-b-sd)/(2*a))}`);
+  } else {
+    const sd = Math.sqrt(-d);
+    lines.push(`D < 0, so the roots are complex: x = (−b ± i√|D|) / (2a)`);
+    lines.push(`√|D| = ${fmtNum(sd)}`);
+    lines.push(`x1 = ${fmtNum(-b/(2*a))} + ${fmtNum(sd/(2*a))}i`);
+    lines.push(`x2 = ${fmtNum(-b/(2*a))} − ${fmtNum(sd/(2*a))}i`);
+  }
+  return lines.join('\n');
+}
+function stepsCubic(a,b,c,d){
+  const lines = [];
+  lines.push(`Equation: ${fmtNum(a)}x³ + ${fmtNum(b)}x² + ${fmtNum(c)}x + ${fmtNum(d)} = 0`);
+  const B=b/a, C=c/a, D=d/a;
+  lines.push(`Divide by a: x³ + ${fmtNum(B)}x² + ${fmtNum(C)}x + ${fmtNum(D)} = 0`);
+  const p = C - (B*B)/3;
+  const q = (2*B*B*B)/27 - (B*C)/3 + D;
+  lines.push(`Depress with x = t − (${fmtNum(B)})/3, giving t³ + pt + q = 0`);
+  lines.push(`p = ${fmtNum(p)}, q = ${fmtNum(q)}`);
+  const disc = (q*q)/4 + (p*p*p)/27;
+  lines.push(`Discriminant: Δ = (q/2)² + (p/3)³ = ${fmtNum(disc)}`);
+  if(disc > 1e-9) lines.push(`Δ > 0 → one real root and a complex conjugate pair (Cardano's formula).`);
+  else if(Math.abs(disc) <= 1e-9) lines.push(`Δ ≈ 0 → a repeated real root.`);
+  else lines.push(`Δ < 0 → three distinct real roots (trigonometric method).`);
+  lines.push(`Substitute back x = t − B/3 to get the roots below.`);
+  return lines.join('\n');
+}
+
+const POLY_LABELS = { 1:['a','b'], 2:['a','b','c'], 3:['a','b','c','d'] };
+let lastPolyInput = null;
+function renderPolyInputs(){
+  const degree = parseInt(document.getElementById('poly-degree').value);
+  const labels = POLY_LABELS[degree];
+  const wrap = document.getElementById('poly-inputs');
+  wrap.innerHTML = '';
+  labels.forEach(l=>{
+    const field = document.createElement('div');
+    field.className = 'poly-field';
+    field.innerHTML = `<label>${l}</label><input type="text" inputmode="text" data-coef="${l}" value="${l==='a'?'1':'0'}">`;
+    wrap.appendChild(field);
+  });
+  wrap.querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('focus', ()=>{ lastPolyInput = inp; });
+  });
+  lastPolyInput = wrap.querySelector('input');
+  document.getElementById('poly-result').textContent = '';
+  document.getElementById('poly-steps').textContent = '';
+}
+document.getElementById('poly-sqrt-btn').addEventListener('click', ()=>{
+  const inp = lastPolyInput || document.querySelector('#poly-inputs input');
+  if(!inp) return;
+  const start = inp.selectionStart ?? inp.value.length;
+  const end = inp.selectionEnd ?? inp.value.length;
+  inp.value = inp.value.slice(0,start) + '√' + inp.value.slice(end);
+  inp.focus();
+  inp.setSelectionRange(start+1, start+1);
+});
+function evalCoefExpr(str){
+  str = (str || '').trim().replace(/√/g, 'sqrt');
+  if(str === '') return 0;
+  let i = 0;
+  function isDigit(c){ return c>='0' && c<='9'; }
+  function skipSpace(){ while(str[i]===' ') i++; }
+  function peek(){ return str[i]; }
+  function parseExpr(){
+    let v = parseTerm();
+    while(true){
+      skipSpace();
+      const c = peek();
+      if(c==='+'){ i++; v += parseTerm(); }
+      else if(c==='-'){ i++; v -= parseTerm(); }
+      else break;
+    }
+    return v;
+  }
+  function parseTerm(){
+    let v = parseUnary();
+    while(true){
+      skipSpace();
+      const c = peek();
+      if(c==='*'){ i++; v *= parseUnary(); }
+      else if(c==='/'){ i++; v /= parseUnary(); }
+      else if(c && (isDigit(c) || c==='(' || str.slice(i,i+4)==='sqrt')){ v *= parseUnary(); }
+      else break;
+    }
+    return v;
+  }
+  function parseUnary(){
+    skipSpace();
+    const c = peek();
+    if(c==='-'){ i++; return -parseUnary(); }
+    if(c==='+'){ i++; return parseUnary(); }
+    return parsePrimary();
+  }
+  function parsePrimary(){
+    skipSpace();
+    if(str.slice(i,i+4)==='sqrt'){
+      i += 4;
+      skipSpace();
+      if(peek()==='('){
+        i++;
+        const v = parseExpr();
+        skipSpace();
+        if(peek()===')') i++;
+        return Math.sqrt(v);
+      }
+      return Math.sqrt(parseNumber());
+    }
+    if(peek()==='('){
+      i++;
+      const v = parseExpr();
+      skipSpace();
+      if(peek()===')') i++;
+      return v;
+    }
+    return parseNumber();
+  }
+  function parseNumber(){
+    skipSpace();
+    const start = i;
+    while(i<str.length && (isDigit(str[i]) || str[i]==='.')) i++;
+    if(i===start) throw new Error('bad expression');
+    return parseFloat(str.slice(start,i));
+  }
+  const v = parseExpr();
+  if(Number.isNaN(v)) throw new Error('bad expression');
+  return v;
+}
+document.getElementById('poly-degree').addEventListener('change', renderPolyInputs);
+document.getElementById('poly-open-btn').addEventListener('click', ()=>{
+  document.getElementById('calc-body').style.display = 'none';
+  document.getElementById('poly-panel').classList.add('active');
+  renderPolyInputs();
+});
+document.getElementById('poly-close-btn').addEventListener('click', ()=>{
+  document.getElementById('poly-panel').classList.remove('active');
+  document.getElementById('calc-body').style.display = 'flex';
+});
+document.getElementById('poly-solve-btn').addEventListener('click', ()=>{
+  const degree = parseInt(document.getElementById('poly-degree').value);
+  const vals = {};
+  const result = document.getElementById('poly-result');
+  const stepsEl = document.getElementById('poly-steps');
+  try{
+    document.querySelectorAll('#poly-inputs input').forEach(inp=>{ vals[inp.dataset.coef] = evalCoefExpr(inp.value); });
+  }catch(e){
+    result.textContent = 'Couldn\'t read a coefficient — check for a typo (e.g. √2, 3/4, -√5/2).';
+    stepsEl.textContent = '';
+    return;
+  }
+  let roots, steps;
+  if(degree===1){ roots = solveLinear(vals.a, vals.b); steps = stepsLinear(vals.a, vals.b); }
+  else if(degree===2){ roots = solveQuadratic(vals.a, vals.b, vals.c); steps = stepsQuadratic(vals.a, vals.b, vals.c); }
+  else { roots = solveCubic(vals.a, vals.b, vals.c, vals.d); steps = stepsCubic(vals.a, vals.b, vals.c, vals.d); }
+  if(!roots){ result.textContent = 'No solution — leading coefficient can\'t be 0.'; stepsEl.textContent=''; return; }
+  result.textContent = roots.map((r,i)=> fmtRoot(r, i+1)).join('\n');
+  stepsEl.textContent = steps;
+});
+
+/* ===================== GAME ===================== */
+const gcanvas = document.getElementById('game-canvas');
+const gctx = gcanvas.getContext('2d');
+const LANES = 3;
+const ROAD_MARGIN = 28;
+const ROAD_WIDTH = gcanvas.width - ROAD_MARGIN*2;
+const LANE_W = ROAD_WIDTH/LANES;
+const GROUND_Y = gcanvas.height - 60;
+
+const PLAYER_A = ["..kkkk..",".kwkkwk.",".kkkkkk.","..kkkk..",".kkkkkk.","kkkkkkkk","kkkkkkkk",".kk..kk.",".kk..kk.","kkk..kkk"];
+const PLAYER_B = ["..kkkk..",".kwkkwk.",".kkkkkk.","..kkkk..",".kkkkkk.","kkkkkkkk","kkkkkkkk","kkk..kk.",".kk..kkk","..kkkkk."];
+const PAL_PLAYER = {k:'#ffffff', w:'#0d0f14'};
+const SHOP_SKINS = [
+  { id:'default', name:'Classic White', price:0, pal:{k:'#ffffff', w:'#0d0f14'} },
+  { id:'crimson', name:'Crimson Runner', price:150, pal:{k:'#e0435c', w:'#ffffff'} },
+  { id:'neon', name:'Neon Runner', price:250, pal:{k:'#39d8ff', w:'#0d0f14'} },
+  { id:'gold', name:'Gold Runner', price:400, pal:{k:'#ffd76a', w:'#0d0f14'} },
+];
+function getActivePlayerPal(){
+  const s = SHOP_SKINS.find(s=>s.id===activeSkin);
+  return s ? s.pal : PAL_PLAYER;
+}
+const SHOP_THEMES = [
+  { id:'sunset', name:'Sunset', price:300, swatch:'#ff7a59' },
+  { id:'ocean', name:'Ocean', price:500, swatch:'#2fc7d6' },
+  { id:'forest', name:'Forest', price:800, swatch:'#7ac74f' },
+];
+const ACHIEVEMENTS = [
+  { id:'first_run', icon:'🎮', name:'First Steps', desc:'Play your first game', check: ()=> gamesPlayed>=1 },
+  { id:'coins_100', icon:'🪙', name:'Coin Collector', desc:'Collect 100 total coins', check: ()=> coinTotal>=100 },
+  { id:'coins_500', icon:'💰', name:'Coin Hoarder', desc:'Collect 500 total coins', check: ()=> coinTotal>=500 },
+  { id:'score_500', icon:'🏃', name:'Survivor', desc:'Reach a score of 500 in one run', check: (s)=> s>=500 },
+  { id:'turns_10', icon:'↪️', name:'Turn Master', desc:'Successfully complete 10 turns', check: ()=> turnsResolvedTotal>=10 },
+  { id:'games_20', icon:'🔁', name:'Dedicated', desc:'Play 20 games', check: ()=> gamesPlayed>=20 },
+];
+function checkAchievements(lastScore){
+  let newlyUnlocked = [];
+  ACHIEVEMENTS.forEach(a=>{
+    if(!unlockedAchievements.includes(a.id) && a.check(lastScore)){
+      unlockedAchievements.push(a.id);
+      newlyUnlocked.push(a);
+    }
+  });
+  if(newlyUnlocked.length){
+    saveGameData();
+    newlyUnlocked.forEach((a,i)=>{
+      setTimeout(()=> showToast('🏆 Achievement: '+a.name), i*1600);
+    });
+  }
+}
+
+const OBSTACLE = ["gggggggg","gggggggg","gggggggg","gggggggg"];
+const PAL_OBST = {g:'#8a5a44'};
+
+const COIN = [".yy.","yyyy","yyyy",".yy."];
+const PAL_COIN = {y:'#ffcf56'};
+
+const TREE_VARIANTS = [
+  { grid:["..gggg..",".gggggg.","gggggggg",".gggggg.","...tt...","...tt...","...tt..."], palette:{g:'#2fae63', t:'#6b4a2c'} },
+  { grid:["..gggg..",".gggggg.","gggggggg",".gggggg.","...tt...","...tt...","...tt..."], palette:{g:'#3fc472', t:'#5a3d24'} },
+  { grid:["..gggg..",".gggggg.","gggggggg",".gggggg.","...tt...","...tt...","...tt..."], palette:{g:'#1f8f4c', t:'#6b4a2c'} },
+];
+const FLOWER_VARIANTS = [
+  { grid:["..f..","fpf..","..f..","..s..","..s.."], palette:{f:'#ff6fa5', p:'#ffe66d', s:'#3fae5c'} },
+  { grid:["..f..","fpf..","..f..","..s..","..s.."], palette:{f:'#6fa8ff', p:'#ffe66d', s:'#3fae5c'} },
+  { grid:["..f..","fpf..","..f..","..s..","..s.."], palette:{f:'#c66fff', p:'#ffe66d', s:'#3fae5c'} },
+  { grid:["..f..","fpf..","..f..","..s..","..s.."], palette:{f:'#ff9a4d', p:'#ffe66d', s:'#3fae5c'} },
+];
+let scenery = [], sceneryTimer = 0;
+function spawnScenery(){
+  const side = Math.random()<0.5 ? 'left' : 'right';
+  const isTree = Math.random()<0.45;
+  const variants = isTree ? TREE_VARIANTS : FLOWER_VARIANTS;
+  scenery.push({ side, y:-70, type: isTree?'tree':'flower', variant: Math.floor(Math.random()*variants.length) });
+}
+function drawScenery(s){
+  const variants = s.type==='tree' ? TREE_VARIANTS : FLOWER_VARIANTS;
+  const v = variants[s.variant % variants.length];
+  const scale = s.type==='tree' ? 3 : 4;
+  const gridWidth = v.grid[0].length * scale;
+  const baseX = s.side==='left'
+    ? (ROAD_MARGIN - gridWidth)/2
+    : gcanvas.width - ROAD_MARGIN + (ROAD_MARGIN - gridWidth)/2;
+  drawPixels(gctx, baseX, s.y, scale, v.grid, v.palette);
+}
+
+const COLLECTIBLES = [
+  { name:'Ruby Crystal', pal:{r:'#e0435c','h':'#ff8fa3'}, grid:["..r.","..r.",".rhr.".slice(0,4),"r.rr","..r."] , simple:["..r.",".rhr","rrhr.".slice(0,4),".rhr","..r."]},
+  { name:'Sapphire Crystal', pal:{b:'#3b6fe0',h:'#9dc1ff'}, simple:["..b.",".bhb","bbhb.".slice(0,4),".bhb","..b."]},
+  { name:'Emerald Crystal', pal:{e:'#2fae63',h:'#8ff0bb'}, simple:["..e.",".ehe","eehe.".slice(0,4),".ehe","..e."]},
+  { name:'Rose Bloom', pal:{p:'#ff6fa5',g:'#3fae5c'}, simple:[".p.p.","pppp.".slice(0,5),".ppp.","..g..","..g.."]},
+  { name:'Sunflower Bloom', pal:{y:'#ffcf56',o:'#c97b1c',g:'#3fae5c'}, simple:["y.y.y","yooy.".slice(0,5),"y.y.y","..g..","..g.."]},
+  { name:'Vintage Stamp', pal:{w:'#f3ead1',k:'#8a5a44',s:'#5a7fae'}, simple:["kkkkk","kwswk","kwwwk","kwswk","kkkkk"]},
+];
+
+let player, obstacles, coins, particles, animT, gState, coinTotal, score, best, spawnTimer, speed, running, rafId, collectibles=[];
+let activeTurn=null, turnFlash=0, lastTurnDir=null, turnSpawnTimer=0, nextTurnAt=7;
+let unlockedThemes=[], unlockedSkins=['default'], activeSkin='default';
+let unlockedAchievements=[], gamesPlayed=0, turnsResolvedTotal=0;
+
+function loadPlayerCollectibles(){}
+
+async function loadGameDataForAccount(){
+  try{
+    const r = await storage.get('game:'+currentAccount);
+    if(r && r.value){
+      const d = JSON.parse(r.value);
+      best = d.best||0; coinTotal = d.coinTotal||0; collectibles = d.collectibles||[];
+      unlockedThemes = d.unlockedThemes||[];
+      unlockedSkins = d.unlockedSkins||['default'];
+      activeSkin = d.activeSkin||'default';
+      activeShopTheme = d.activeShopTheme||null;
+      unlockedAchievements = d.unlockedAchievements||[];
+      gamesPlayed = d.gamesPlayed||0;
+      turnsResolvedTotal = d.turnsResolvedTotal||0;
+    } else {
+      best=0; coinTotal=0; collectibles=[]; unlockedThemes=[]; unlockedSkins=['default']; activeSkin='default';
+      activeShopTheme=null; unlockedAchievements=[]; gamesPlayed=0; turnsResolvedTotal=0;
+    }
+  }catch(e){
+    best=0; coinTotal=0; collectibles=[]; unlockedThemes=[]; unlockedSkins=['default']; activeSkin='default';
+    activeShopTheme=null; unlockedAchievements=[]; gamesPlayed=0; turnsResolvedTotal=0;
+  }
+  document.getElementById('hud-best').textContent = 'Best: '+best;
+  renderInventory();
+  renderLevelHud();
+  if(!cosmicMode) applyTheme();
+}
+async function saveGameData(){
+  try{
+    await storage.set('game:'+currentAccount, JSON.stringify({
+      best, coinTotal, collectibles, unlockedThemes, unlockedSkins, activeSkin,
+      activeShopTheme, unlockedAchievements, gamesPlayed, turnsResolvedTotal
+    }));
+  }catch(e){}
+}
+function getLevel(coins){ return 1 + Math.floor(coins/200); }
+function renderLevelHud(){
+  const lvl = getLevel(coinTotal);
+  const into = coinTotal % 200;
+  document.getElementById('hud-level').textContent = 'Lv. '+lvl;
+  document.getElementById('hud-level-fill').style.width = (into/200*100)+'%';
+}
+
+/* ===================== SHOP & ACHIEVEMENTS ===================== */
+function renderShopCoinBalance(){
+  document.getElementById('shop-coin-balance').textContent = '🪙 ' + coinTotal;
+}
+function renderShopThemes(){
+  const list = document.getElementById('shop-themes-list');
+  list.innerHTML = '';
+  SHOP_THEMES.forEach(t=>{
+    const owned = unlockedThemes.includes(t.id);
+    const equipped = activeShopTheme === t.id;
+    const item = document.createElement('div');
+    item.className = 'shop-item';
+    item.innerHTML = `
+      <div class="shop-item-swatch" style="background:${t.swatch};"></div>
+      <div class="shop-item-info">
+        <div class="shop-item-name">${t.name}</div>
+        <div class="shop-item-price">${owned ? (equipped ? 'Equipped' : 'Owned') : t.price + ' coins'}</div>
+      </div>
+      <button class="shop-item-btn ${equipped ? 'equipped' : ''}" ${(!owned && coinTotal < t.price) ? 'disabled' : ''}>
+        ${equipped ? 'Equipped' : owned ? 'Equip' : 'Buy'}
+      </button>`;
+    item.querySelector('button').addEventListener('click', ()=>{
+      if(equipped) return;
+      if(owned){
+        activeShopTheme = t.id;
+        saveGameData();
+        applyTheme();
+        renderShopThemes();
+        showToast('Theme equipped: ' + t.name);
+      } else {
+        if(coinTotal < t.price) return;
+        coinTotal -= t.price;
+        unlockedThemes.push(t.id);
+        activeShopTheme = t.id;
+        saveGameData();
+        applyTheme();
+        document.getElementById('hud-coins').textContent = 'Coins: ' + coinTotal;
+        renderShopCoinBalance();
+        renderShopThemes();
+        showToast('Purchased & equipped: ' + t.name);
+      }
+    });
+    list.appendChild(item);
+  });
+}
+function renderShopSkins(){
+  const list = document.getElementById('shop-skins-list');
+  list.innerHTML = '';
+  SHOP_SKINS.forEach(s=>{
+    const owned = unlockedSkins.includes(s.id);
+    const equipped = activeSkin === s.id;
+    const item = document.createElement('div');
+    item.className = 'shop-item';
+    item.innerHTML = `
+      <div class="shop-item-swatch" style="background:${s.pal.k};"></div>
+      <div class="shop-item-info">
+        <div class="shop-item-name">${s.name}</div>
+        <div class="shop-item-price">${owned ? (equipped ? 'Equipped' : 'Owned') : (s.price === 0 ? 'Free' : s.price + ' coins')}</div>
+      </div>
+      <button class="shop-item-btn ${equipped ? 'equipped' : ''}" ${(!owned && coinTotal < s.price) ? 'disabled' : ''}>
+        ${equipped ? 'Equipped' : owned ? 'Equip' : 'Buy'}
+      </button>`;
+    item.querySelector('button').addEventListener('click', ()=>{
+      if(equipped) return;
+      if(owned){
+        activeSkin = s.id;
+        saveGameData();
+        renderShopSkins();
+        showToast('Skin equipped: ' + s.name);
+      } else {
+        if(coinTotal < s.price) return;
+        coinTotal -= s.price;
+        unlockedSkins.push(s.id);
+        activeSkin = s.id;
+        saveGameData();
+        document.getElementById('hud-coins').textContent = 'Coins: ' + coinTotal;
+        renderShopCoinBalance();
+        renderShopSkins();
+        showToast('Purchased & equipped: ' + s.name);
+      }
+    });
+    list.appendChild(item);
+  });
+}
+document.getElementById('shop-open-btn').addEventListener('click', ()=>{
+  document.getElementById('game-body').style.display = 'none';
+  document.getElementById('shop-panel').classList.add('active');
+  renderShopCoinBalance();
+  renderShopThemes();
+  renderShopSkins();
+});
+document.getElementById('shop-close-btn').addEventListener('click', ()=>{
+  document.getElementById('shop-panel').classList.remove('active');
+  document.getElementById('game-body').style.display = 'flex';
+});
+document.querySelectorAll('.shop-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.shop-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const which = tab.dataset.shoptab;
+    document.getElementById('shop-themes-list').style.display = which === 'themes' ? 'flex' : 'none';
+    document.getElementById('shop-skins-list').style.display = which === 'skins' ? 'flex' : 'none';
+  });
+});
+function renderAchievements(){
+  const list = document.getElementById('ach-list');
+  list.innerHTML = '';
+  ACHIEVEMENTS.forEach(a=>{
+    const unlocked = unlockedAchievements.includes(a.id);
+    const item = document.createElement('div');
+    item.className = 'shop-item';
+    item.style.opacity = unlocked ? '1' : '0.5';
+    item.innerHTML = `
+      <div class="shop-item-swatch" style="display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--surface);">${unlocked ? a.icon : '🔒'}</div>
+      <div class="shop-item-info">
+        <div class="shop-item-name">${a.name}</div>
+        <div class="shop-item-price">${a.desc}</div>
+      </div>`;
+    list.appendChild(item);
+  });
+}
+document.getElementById('ach-open-btn').addEventListener('click', ()=>{
+  document.getElementById('game-body').style.display = 'none';
+  document.getElementById('ach-panel').classList.add('active');
+  renderAchievements();
+});
+document.getElementById('ach-close-btn').addEventListener('click', ()=>{
+  document.getElementById('ach-panel').classList.remove('active');
+  document.getElementById('game-body').style.display = 'flex';
+});
+
+function resetGame(){
+  player = { lane:1, y:GROUND_Y, vy:0, jumping:false };
+  obstacles = []; coins = []; particles = []; scenery = [];
+  animT = 0; score = 0; spawnTimer = 0; speed = 3.2; sceneryTimer = 0;
+  activeTurn = null; turnFlash = 0; turnSpawnTimer = 0; nextTurnAt = 6+Math.random()*4; lastTurnDir = null;
+  document.getElementById('hud-coins').textContent = 'Coins: 0';
+  document.getElementById('hud-score').textContent = 'Score: 0';
+}
+function spawnTurn(){
+  activeTurn = { dir: Math.random()<0.5?'left':'right', y:-70, resolved:false };
+}
+function resolveTurn(dir){
+  if(!activeTurn || activeTurn.resolved) return;
+  activeTurn.resolved = true;
+  lastTurnDir = dir;
+  turnFlash = 1;
+  score += 25;
+  turnsResolvedTotal++;
+  checkAchievements(Math.floor(score));
+  saveGameData();
+}
+function pressDirection(d){
+  const dirName = d<0 ? 'left' : 'right';
+  if(activeTurn && !activeTurn.resolved){
+    if(dirName === activeTurn.dir) resolveTurn(dirName);
+    else endGame();
+    return;
+  }
+  moveLane(d);
+}
+function drawTurnBanner(t){
+  gctx.fillStyle = 'rgba(255,207,86,0.15)';
+  gctx.fillRect(0, t.y-8, gcanvas.width, 44);
+  gctx.fillStyle = '#ffcf56';
+  gctx.beginPath();
+  if(t.dir==='left'){
+    gctx.moveTo(gcanvas.width*0.62, t.y);
+    gctx.lineTo(gcanvas.width*0.34, t.y+18);
+    gctx.lineTo(gcanvas.width*0.62, t.y+36);
+  } else {
+    gctx.moveTo(gcanvas.width*0.38, t.y);
+    gctx.lineTo(gcanvas.width*0.66, t.y+18);
+    gctx.lineTo(gcanvas.width*0.38, t.y+36);
+  }
+  gctx.closePath();
+  gctx.fill();
+  gctx.fillStyle = '#ffcf56';
+  gctx.font = 'bold 11px monospace';
+  gctx.textAlign = 'center';
+  gctx.fillText('TURN!', gcanvas.width/2, t.y-14);
+  gctx.textAlign = 'left';
+}
+
+function laneX(lane){ return ROAD_MARGIN + lane*LANE_W + LANE_W/2 - 20; }
+
+function spawnRow(){
+  const type = Math.random();
+  const lane = Math.floor(Math.random()*LANES);
+  if(type < 0.55){
+    obstacles.push({ lane, y:-40 });
+  } else {
+    const cLane = Math.floor(Math.random()*LANES);
+    for(let i=0;i<3;i++) coins.push({ lane:cLane, y:-40 - i*36 });
+  }
+}
+
+function drawBackground(){
+  gctx.fillStyle = '#0b2416';
+  gctx.fillRect(0,0,gcanvas.width,gcanvas.height);
+  gctx.fillStyle = '#060606';
+  gctx.fillRect(ROAD_MARGIN,0,ROAD_WIDTH,gcanvas.height);
+  gctx.strokeStyle = 'rgba(255,255,255,0.55)';
+  gctx.lineWidth = 2;
+  gctx.setLineDash([14,12]);
+  const dashOffset = (animT*speed*22) % 26;
+  for(let i=1;i<LANES;i++){
+    gctx.beginPath();
+    gctx.lineDashOffset = -dashOffset;
+    gctx.moveTo(ROAD_MARGIN+i*LANE_W,0); gctx.lineTo(ROAD_MARGIN+i*LANE_W,gcanvas.height); gctx.stroke();
+  }
+  gctx.setLineDash([]);
+  gctx.fillStyle = 'rgba(255,255,255,0.12)';
+  gctx.fillRect(ROAD_MARGIN, GROUND_Y+40, ROAD_WIDTH, 4);
+}
+
+function updateGame(dt){
+  animT += dt;
+  spawnTimer += dt;
+  speed += 0.0006;
+  if(spawnTimer > Math.max(0.55, 1.1 - speed*0.03)){
+    spawnTimer = 0; spawnRow();
+  }
+  obstacles.forEach(o=> o.y += speed);
+  coins.forEach(c=> c.y += speed);
+  obstacles = obstacles.filter(o=>o.y < gcanvas.height+40);
+  coins = coins.filter(c=>c.y < gcanvas.height+40);
+
+  sceneryTimer += dt;
+  if(sceneryTimer > 0.5){
+    sceneryTimer = 0;
+    spawnScenery();
+  }
+  scenery.forEach(s=> s.y += speed);
+  scenery = scenery.filter(s=>s.y < gcanvas.height+60);
+
+  if(player.jumping){
+    player.vy += 0.6;
+    player.y += player.vy;
+    if(player.y >= GROUND_Y){ player.y = GROUND_Y; player.jumping=false; player.vy=0; }
+  }
+
+  // collisions
+  const px = laneX(player.lane)+16, py = player.y+20;
+  obstacles.forEach(o=>{
+    if(o.lane===player.lane){
+      const oy = o.y+16;
+      if(Math.abs(oy-py) < 26 && !(player.jumping && player.y < GROUND_Y-30)){
+        endGame();
+      }
+    }
+  });
+  coins = coins.filter(c=>{
+    if(c.lane===player.lane){
+      const cy = c.y+16;
+      if(Math.abs(cy-py) < 26){
+        coinTotal++; score += 5;
+        document.getElementById('hud-coins').textContent = 'Coins: '+coinTotal;
+        renderLevelHud();
+        if(coinTotal % 100 === 0) awardCollectible();
+        return false;
+      }
+    }
+    return true;
+  });
+  score += dt*10;
+  document.getElementById('hud-score').textContent = 'Score: '+Math.floor(score);
+
+  turnSpawnTimer += dt;
+  if(!activeTurn && turnSpawnTimer > nextTurnAt){
+    spawnTurn();
+    turnSpawnTimer = 0;
+    nextTurnAt = 7 + Math.random()*5;
+  }
+  if(activeTurn){
+    activeTurn.y += speed;
+    if(!activeTurn.resolved && activeTurn.y > GROUND_Y+10){
+      endGame();
+      return;
+    }
+    if(activeTurn.y > gcanvas.height+80) activeTurn = null;
+  }
+  if(turnFlash > 0) turnFlash = Math.max(0, turnFlash - dt*2.2);
+}
+
+function awardCollectible(){
+  const def = COLLECTIBLES[Math.floor(Math.random()*COLLECTIBLES.length)];
+  collectibles.push({ name: def.name, idx: COLLECTIBLES.indexOf(def), t: Date.now() });
+  saveGameData();
+  renderInventory();
+  const toast = document.getElementById('collect-toast');
+  toast.textContent = '✦ Found: ' + def.name;
+  toast.style.display = 'block';
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=>{ toast.style.display='none'; }, 2200);
+}
+
+function renderInventory(){
+  const strip = document.getElementById('inventory-strip');
+  strip.innerHTML = '';
+  collectibles.slice().reverse().forEach(item=>{
+    const def = COLLECTIBLES[item.idx];
+    const wrap = document.createElement('div');
+    wrap.className = 'inv-item';
+    const c = pixelCanvas(6, def.simple, def.pal, 6);
+    c.style.imageRendering='pixelated';
+    wrap.appendChild(c);
+    const label = document.createElement('div');
+    label.className = 'iname'; label.textContent = def.name;
+    wrap.appendChild(label);
+    strip.appendChild(wrap);
+  });
+}
+
+function renderGame(){
+  gctx.save();
+  if(turnFlash > 0 && lastTurnDir){
+    const angle = (lastTurnDir==='left' ? -1 : 1) * turnFlash * 0.1;
+    gctx.translate(gcanvas.width/2, gcanvas.height/2);
+    gctx.rotate(angle);
+    gctx.translate(-gcanvas.width/2, -gcanvas.height/2);
+  }
+  drawBackground();
+  scenery.forEach(drawScenery);
+  obstacles.forEach(o=> drawPixels(gctx, laneX(o.lane), o.y, 5, OBSTACLE, PAL_OBST));
+  coins.forEach(c=> drawPixels(gctx, laneX(c.lane)+10, c.y, 6, COIN, PAL_COIN));
+  if(activeTurn) drawTurnBanner(activeTurn);
+  const frame = Math.floor(animT*8)%2===0 ? PLAYER_A : PLAYER_B;
+  drawPixels(gctx, laneX(player.lane), player.y-20, 4, player.jumping?PLAYER_A:frame, getActivePlayerPal());
+  gctx.restore();
+}
+
+let lastT = null;
+function gameLoop(ts){
+  if(!running) return;
+  if(lastT===null) lastT = ts;
+  const dt = Math.min(0.05, (ts-lastT)/1000);
+  lastT = ts;
+  updateGame(dt);
+  renderGame();
+  rafId = requestAnimationFrame(gameLoop);
+}
+
+function startGameLoopIfNeeded(){
+  if(!gState) armStart();
+}
+function armStart(){
+  gState = 'ready';
+  resetGame();
+  renderGame();
+  document.getElementById('game-overlay').classList.add('show');
+  document.getElementById('overlay-title').textContent = 'READY?';
+  document.getElementById('overlay-sub').textContent = 'Dodge crates, grab coins, and tap the right way when a TURN! banner shows up.';
+  document.getElementById('overlay-btn').textContent = 'Start';
+}
+function beginRun(){
+  gState = 'playing';
+  document.getElementById('game-overlay').classList.remove('show');
+  running = true; lastT = null;
+  rafId = requestAnimationFrame(gameLoop);
+}
+function endGame(){
+  running = false;
+  gState = 'over';
+  cancelAnimationFrame(rafId);
+  if(Math.floor(score) > best){ best = Math.floor(score); document.getElementById('hud-best').textContent='Best: '+best; }
+  gamesPlayed++;
+  checkAchievements(Math.floor(score));
+  renderLevelHud();
+  saveGameData();
+  document.getElementById('game-overlay').classList.add('show');
+  document.getElementById('overlay-title').textContent = 'CRASHED!';
+  document.getElementById('overlay-sub').textContent = 'Score '+Math.floor(score)+' · Coins '+coinTotal;
+  document.getElementById('overlay-btn').textContent = 'Play again';
+}
+function pauseGame(){
+  running = false;
+  if(rafId) cancelAnimationFrame(rafId);
+}
+document.getElementById('overlay-btn').addEventListener('click', ()=>{
+  if(gState==='ready') beginRun();
+  else armStart();
+});
+function moveLane(d){ player.lane = Math.max(0, Math.min(LANES-1, player.lane+d)); }
+function doJump(){ if(!player.jumping){ player.jumping=true; player.vy=-11.5; } }
+document.getElementById('btn-left').addEventListener('click', ()=>pressDirection(-1));
+document.getElementById('btn-right').addEventListener('click', ()=>pressDirection(1));
+document.getElementById('btn-jump').addEventListener('click', doJump);
+document.addEventListener('keydown', (e)=>{
+  if(!document.getElementById('view-game').classList.contains('active')) return;
+  if(e.key==='ArrowLeft') pressDirection(-1);
+  else if(e.key==='ArrowRight') pressDirection(1);
+  else if(e.key==='ArrowUp' || e.key===' ') doJump();
+});
+// swipe
+let touchStartX=null, touchStartY=null;
+gcanvas.addEventListener('touchstart', e=>{ const t=e.changedTouches[0]; touchStartX=t.clientX; touchStartY=t.clientY; });
+gcanvas.addEventListener('touchend', e=>{
+  if(touchStartX===null) return;
+  const t=e.changedTouches[0];
+  const dx=t.clientX-touchStartX, dy=t.clientY-touchStartY;
+  if(Math.abs(dx)>Math.abs(dy) && Math.abs(dx)>30){ pressDirection(dx>0?1:-1); }
+  else if(dy<-30){ doJump(); }
+  touchStartX=null;
+});
+
+/* ===================== NOTES ===================== */
+let notes = [];
+let folders = [];
+let activeNoteId = null;
+let currentFolder = 'All';
+let notesSearchQuery = '';
+
+async function loadNotesForAccount(){
+  try{
+    const r = await storage.get('notes:'+currentAccount);
+    notes = r && r.value ? JSON.parse(r.value) : [];
+  }catch(e){ notes = []; }
+  try{
+    const rf = await storage.get('folders:'+currentAccount);
+    folders = rf && rf.value ? JSON.parse(rf.value) : [];
+  }catch(e){ folders = []; }
+  currentFolder = 'All';
+  notesSearchQuery = '';
+  document.getElementById('notes-search').value = '';
+  renderFolderTabs();
+  renderNotesList();
+}
+async function saveNotesForAccount(){
+  try{ await storage.set('notes:'+currentAccount, JSON.stringify(notes)); }catch(e){}
+}
+async function saveFolders(){
+  try{ await storage.set('folders:'+currentAccount, JSON.stringify(folders)); }catch(e){}
+}
+
+function renderFolderTabs(){
+  const wrap = document.getElementById('folder-tabs');
+  wrap.innerHTML = '';
+  const all = ['All', ...folders];
+  all.forEach(f=>{
+    const tab = document.createElement('div');
+    tab.className = 'folder-tab' + (f===currentFolder ? ' active' : '');
+    tab.textContent = f;
+    tab.addEventListener('click', ()=>{
+      currentFolder = f;
+      renderFolderTabs();
+      renderNotesList();
+    });
+    wrap.appendChild(tab);
+  });
+}
+
+function renderNotesList(){
+  const list = document.getElementById('notes-list');
+  list.innerHTML = '';
+  let filtered = notes;
+  if(currentFolder !== 'All') filtered = filtered.filter(n => (n.folder||'') === currentFolder);
+  if(notesSearchQuery.trim()){
+    const q = notesSearchQuery.trim().toLowerCase();
+    filtered = filtered.filter(n=>{
+      const plain = (n.textHTML||'').replace(/<[^>]+>/g,' ').toLowerCase();
+      return (n.title||'').toLowerCase().includes(q) || plain.includes(q);
+    });
+  }
+  if(filtered.length===0){
+    list.innerHTML = '<div id="empty-notes">No notes found.</div>';
+    return;
+  }
+  const sorted = [...filtered].sort((a,b)=> (b.pinned?1:0)-(a.pinned?1:0) || b.updatedAt-a.updatedAt);
+  sorted.forEach(n=>{
+    const card = document.createElement('div');
+    card.className='note-card';
+    const plain = (n.textHTML||'').replace(/<[^>]+>/g,' ').trim();
+    const folderTag = n.folder ? `<span style="font-size:10px;color:var(--accent2);">${escapeHtml(n.folder)}</span> ` : '';
+    card.innerHTML = `<div><div class="nc-title">${folderTag}${escapeHtml(n.title||'Untitled')}</div><div class="nc-prev">${escapeHtml(plain).slice(0,90)}</div></div>
+      <button class="nc-star ${n.pinned?'pinned':''}">${n.pinned?'★':'☆'}</button>`;
+    card.addEventListener('click', (e)=>{
+      if(e.target.classList.contains('nc-star')) return;
+      openEditor(n.id);
+    });
+    card.querySelector('.nc-star').addEventListener('click', (e)=>{
+      e.stopPropagation();
+      n.pinned = !n.pinned;
+      saveNotesForAccount(); renderNotesList();
+    });
+    list.appendChild(card);
+  });
+}
+document.getElementById('notes-search').addEventListener('input', (e)=>{
+  notesSearchQuery = e.target.value;
+  renderNotesList();
+});
+document.getElementById('folder-manage-btn').addEventListener('click', async ()=>{
+  const name = await askInput('New folder name:', { type:'text', okLabel:'Create' });
+  if(!name || !name.trim()) return;
+  const trimmed = name.trim();
+  if(!folders.includes(trimmed)){
+    folders.push(trimmed);
+    await saveFolders();
+    renderFolderTabs();
+  }
+});
+function escapeHtml(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+document.getElementById('new-note-btn').addEventListener('click', ()=>{
+  const n = { id: 'n'+Date.now(), title:'', textHTML:'', drawing:null, pinned:false, folder: currentFolder!=='All' ? currentFolder : null, updatedAt:Date.now() };
+  notes.push(n);
+  openEditor(n.id);
+});
+
+function renderFolderSelectOptions(selected){
+  const sel = document.getElementById('editor-folder-select');
+  sel.innerHTML = '<option value="">No folder</option>' + folders.map(f=>`<option value="${escapeHtml(f)}">${escapeHtml(f)}</option>`).join('');
+  sel.value = selected || '';
+}
+
+function openEditor(id){
+  activeNoteId = id;
+  const n = notes.find(x=>x.id===id);
+  document.getElementById('editor-title').value = n.title||'';
+  document.getElementById('text-pane').innerHTML = n.textHTML||'';
+  renderFolderSelectOptions(n.folder);
+  document.getElementById('editor').classList.add('active');
+  document.getElementById('notes-body').style.display = 'none';
+  document.getElementById('new-note-btn').style.display = 'none';
+  updatePinBtn(n);
+  switchEditorTab('text');
+  if(n.drawing){
+    const img = new Image();
+    img.onload = ()=>{ dctx.clearRect(0,0,dcanvas.width,dcanvas.height); dctx.drawImage(img,0,0); };
+    img.src = n.drawing;
+  } else {
+    dctx.clearRect(0,0,dcanvas.width,dcanvas.height);
+  }
+}
+function updatePinBtn(n){
+  document.getElementById('btn-pin').textContent = n.pinned ? '★ Pinned' : '☆ Pin';
+}
+document.getElementById('editor-back').addEventListener('click', closeEditor);
+function closeEditor(){
+  document.getElementById('editor').classList.remove('active');
+  document.getElementById('notes-body').style.display = '';
+  document.getElementById('new-note-btn').style.display = '';
+  activeNoteId = null;
+}
+
+function currentNote(){ return notes.find(x=>x.id===activeNoteId); }
+
+document.getElementById('btn-save').addEventListener('click', async ()=>{
+  const n = currentNote(); if(!n) return;
+  n.title = document.getElementById('editor-title').value;
+  n.textHTML = document.getElementById('text-pane').innerHTML;
+  n.drawing = dcanvas.toDataURL('image/png');
+  n.folder = document.getElementById('editor-folder-select').value || null;
+  n.updatedAt = Date.now();
+  await saveNotesForAccount();
+  renderNotesList();
+  closeEditor();
+});
+document.getElementById('btn-delete').addEventListener('click', async ()=>{
+  const ok = await askConfirm('Delete this note? This can\'t be undone.', 'Delete');
+  if(!ok) return;
+  notes = notes.filter(x=>x.id!==activeNoteId);
+  await saveNotesForAccount();
+  renderNotesList();
+  closeEditor();
+  showToast('Note deleted');
+});
+document.getElementById('btn-pin').addEventListener('click', ()=>{
+  const n = currentNote(); if(!n) return;
+  n.pinned = !n.pinned; updatePinBtn(n);
+});
+
+/* text formatting */
+document.querySelectorAll('#text-toolbar [data-fmt]').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.getElementById('text-pane').focus();
+    document.execCommand(b.dataset.fmt, false, null);
+  });
+});
+document.getElementById('font-color').addEventListener('input', (e)=>{
+  document.getElementById('text-pane').focus();
+  document.execCommand('foreColor', false, e.target.value);
+});
+document.getElementById('font-size').addEventListener('change', (e)=>{
+  document.getElementById('text-pane').focus();
+  document.execCommand('fontSize', false, e.target.value);
+});
+document.getElementById('btn-copy').addEventListener('click', async ()=>{
+  const plain = document.getElementById('text-pane').innerText;
+  if(!plain){ showToast('Nothing to copy yet.'); return; }
+  try{
+    await navigator.clipboard.writeText(plain);
+    showToast('Note copied.');
+    return;
+  }catch(e){}
+  try{
+    const ta = document.createElement('textarea');
+    ta.value = plain;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast(ok ? 'Note copied.' : 'Copy blocked by the browser — try selecting the text manually.');
+  }catch(e){
+    showToast('Copy blocked by the browser — try selecting the text manually.');
+  }
+});
+document.getElementById('btn-paste').addEventListener('click', async ()=>{
+  try{
+    const t = await navigator.clipboard.readText();
+    if(t){
+      document.getElementById('text-pane').focus();
+      document.execCommand('insertText', false, t);
+      showToast('Pasted.');
+      return;
+    }
+  }catch(e){}
+  const modal = document.getElementById('paste-modal');
+  const ta = document.getElementById('paste-textarea');
+  ta.value = '';
+  modal.classList.add('show');
+  setTimeout(()=> ta.focus(), 50);
+});
+document.getElementById('paste-cancel').addEventListener('click', ()=>{
+  document.getElementById('paste-modal').classList.remove('show');
+});
+document.getElementById('paste-insert').addEventListener('click', ()=>{
+  const t = document.getElementById('paste-textarea').value;
+  document.getElementById('paste-modal').classList.remove('show');
+  if(!t) return;
+  document.getElementById('text-pane').focus();
+  document.execCommand('insertText', false, t);
+  showToast('Pasted.');
+});
+document.getElementById('btn-image').addEventListener('click', ()=>{
+  document.getElementById('image-input').click();
+});
+document.getElementById('image-input').addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev)=>{
+    document.getElementById('text-pane').focus();
+    const html = `<img src="${ev.target.result}" style="max-width:100%;display:block;margin:10px 0;border:2px solid var(--border);">`;
+    document.execCommand('insertHTML', false, html);
+  };
+  reader.onerror = ()=> showToast('Could not read that image.');
+  reader.readAsDataURL(file);
+  e.target.value = '';
+});
+
+/* editor tabs */
+document.querySelectorAll('.editor-tab').forEach(t=>{
+  t.addEventListener('click', ()=> switchEditorTab(t.dataset.tab));
+});
+function switchEditorTab(tab){
+  document.querySelectorAll('.editor-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tab));
+  document.getElementById('text-toolbar').style.display = tab==='text' ? 'flex':'none';
+  document.getElementById('text-pane').style.display = tab==='text' ? 'block':'none';
+  document.getElementById('draw-pane').classList.toggle('active', tab==='draw');
+}
+
+/* drawing canvas */
+const dcanvas = document.getElementById('draw-canvas');
+const dctx = dcanvas.getContext('2d');
+let brushSize = 5, brushColor = '#1c1e24', drawing=false, lastPt=null;
+const COLORS = ['#1c1e24','#c23b3b','#b8791f','#2fae63','#3b6fe0','#8a3bb0','#ffffff'];
+const colorRow = document.getElementById('brush-colors');
+COLORS.forEach((c,i)=>{
+  const sw = document.createElement('div');
+  sw.className = 'swatch'+(i===0?' active':'');
+  sw.style.background = c;
+  sw.addEventListener('click', ()=>{ brushColor=c; document.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active')); sw.classList.add('active'); });
+  colorRow.appendChild(sw);
+});
+document.querySelectorAll('.brush-size').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    brushSize = parseInt(b.dataset.size);
+    document.querySelectorAll('.brush-size').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+  });
+});
+document.getElementById('clear-draw').addEventListener('click', ()=>{
+  dctx.clearRect(0,0,dcanvas.width,dcanvas.height);
+});
+function ptFromEvent(e){
+  const rect = dcanvas.getBoundingClientRect();
+  const scaleX = dcanvas.width/rect.width, scaleY = dcanvas.height/rect.height;
+  return { x:(e.clientX-rect.left)*scaleX, y:(e.clientY-rect.top)*scaleY };
+}
+dcanvas.addEventListener('pointerdown', e=>{
+  drawing = true; lastPt = ptFromEvent(e);
+  dcanvas.setPointerCapture(e.pointerId);
+});
+dcanvas.addEventListener('pointermove', e=>{
+  if(!drawing) return;
+  const p = ptFromEvent(e);
+  dctx.strokeStyle = brushColor; dctx.lineWidth = brushSize; dctx.lineCap='round'; dctx.lineJoin='round';
+  dctx.beginPath(); dctx.moveTo(lastPt.x,lastPt.y); dctx.lineTo(p.x,p.y); dctx.stroke();
+  lastPt = p;
+});
+['pointerup','pointercancel','pointerleave'].forEach(ev=> dcanvas.addEventListener(ev, ()=>{ drawing=false; }));
+
+/* PDF export */
+document.getElementById('btn-pdf').addEventListener('click', ()=>{
+  const n = currentNote(); if(!n) return;
+  try{
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text(document.getElementById('editor-title').value || 'Untitled', 10, 15);
+    doc.setFontSize(11);
+    const plain = document.getElementById('text-pane').innerText || '';
+    const lines = doc.splitTextToSize(plain, 190);
+    doc.text(lines, 10, 26);
+    const hasDrawing = !isCanvasBlank(dcanvas);
+    if(hasDrawing){
+      doc.addPage();
+      doc.setFontSize(13);
+      doc.text('Sketch', 10, 15);
+      const img = dcanvas.toDataURL('image/png');
+      const maxW = 190, maxH = 260;
+      let w = maxW, h = maxW*(dcanvas.height/dcanvas.width);
+      if(h > maxH){ h = maxH; w = maxH*(dcanvas.width/dcanvas.height); }
+      doc.addImage(img, 'PNG', 10, 20, w, h);
+    }
+    doc.save((document.getElementById('editor-title').value || 'note') + '.pdf');
+  }catch(err){
+    showToast('PDF export failed to load. Check your connection and try again.');
+  }
+});
+function isCanvasBlank(c){
+  const ctx = c.getContext('2d');
+  const data = ctx.getImageData(0,0,c.width,c.height).data;
+  for(let i=3;i<data.length;i+=4){ if(data[i]!==0) return false; }
+  return true;
+}
+
+/* ===================== SIDE DRAWER ===================== */
+function openDrawer(){ document.getElementById('drawer-overlay').classList.add('open'); }
+function closeDrawer(){ document.getElementById('drawer-overlay').classList.remove('open'); }
+document.getElementById('menu-btn').addEventListener('click', openDrawer);
+document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+document.getElementById('drawer-overlay').addEventListener('click', (e)=>{
+  if(e.target.id === 'drawer-overlay') closeDrawer();
+});
+
+function renderDrawerMenu(){
+  const content = document.getElementById('drawer-content');
+  content.innerHTML = `
+    <button class="drawer-item" data-action="help">📖 How to use TriBite</button>
+    <button class="drawer-item" data-action="about">✨ About</button>
+    <button class="drawer-item" data-action="storage">💾 Data &amp; storage</button>
+    <button class="drawer-item danger" data-action="reset">🗑 Reset this account's data</button>
+  `;
+  content.querySelectorAll('[data-action]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const a = btn.dataset.action;
+      if(a==='help') showDrawerPanel('How to use', `<b>Calculate It.</b> — standard math plus sin/cos/tan/log/ln, parentheses, factorial, and a polynomial (ƒ(x)) solver with steps.<br><br><b>Play.</b> — dodge crates, grab coins, and tap the matching side when a TURN! banner appears.<br><br><b>Take Notes.</b> — write, sketch, star, attach images, and export to PDF.`);
+      else if(a==='about') showDrawerPanel('About', `TriBite combines a calculator, an endless runner, and a notes app in one place.<br><br>Each of the 3 accounts keeps its own notes and game progress, saved on this device.`);
+      else if(a==='storage') showDrawerPanel('Data & storage', `Notes, game progress, and account names are saved locally on this device — nothing is sent anywhere else.<br><br>Switching accounts switches which saved data you see.`);
+      else if(a==='reset') confirmResetAccount();
+    });
+  });
+}
+function showDrawerPanel(title, bodyHtml){
+  const content = document.getElementById('drawer-content');
+  content.innerHTML = `
+    <button class="drawer-item" id="drawer-back-item">← Back</button>
+    <div class="drawer-panel-title pixel-font">${title}</div>
+    <div class="drawer-panel-body">${bodyHtml}</div>
+  `;
+  document.getElementById('drawer-back-item').addEventListener('click', renderDrawerMenu);
+}
+async function confirmResetAccount(){
+  const ok = await askConfirm(`Reset all notes and game progress for ${accounts[currentAccount].name}?`, 'Reset');
+  if(!ok) return;
+  notes = [];
+  await saveNotesForAccount();
+  best = 0; coinTotal = 0; collectibles = [];
+  await saveGameData();
+  renderNotesList();
+  renderInventory();
+  showToast('Account data reset.');
+  closeDrawer();
+}
+renderDrawerMenu();
+
+/* edge-swipe to open/close the drawer */
+let edgeSwipeStartX=null, edgeSwipeStartY=null, edgeSwipeMode=false;
+document.addEventListener('touchstart', (e)=>{
+  const t = e.touches[0];
+  const isOpen = document.getElementById('drawer-overlay').classList.contains('open');
+  if(!isOpen && t.clientX < 28){
+    edgeSwipeStartX = t.clientX; edgeSwipeStartY = t.clientY; edgeSwipeMode = 'open';
+  } else if(isOpen){
+    edgeSwipeStartX = t.clientX; edgeSwipeStartY = t.clientY; edgeSwipeMode = 'close';
+  } else {
+    edgeSwipeMode = false;
+  }
+}, {passive:true});
+document.addEventListener('touchend', (e)=>{
+  if(!edgeSwipeMode || edgeSwipeStartX===null) return;
+  const t = e.changedTouches[0];
+  const dx = t.clientX - edgeSwipeStartX;
+  const dy = t.clientY - edgeSwipeStartY;
+  if(edgeSwipeMode==='open' && dx>60 && Math.abs(dy)<70) openDrawer();
+  else if(edgeSwipeMode==='close' && dx<-60 && Math.abs(dy)<70) closeDrawer();
+  edgeSwipeMode = false; edgeSwipeStartX = null;
+});
+
+/* ===================== BITE AI ===================== */
+const BITE_WORKER_URL = "https://bite-ai-proxy.jazzysugar920.workers.dev";
+let biteHistory = [];
+let biteAbortController = null;
+
+async function loadBiteHistoryForAccount(){
+  try{
+    const r = await storage.get('bite:'+currentAccount);
+    biteHistory = r && r.value ? JSON.parse(r.value) : [];
+  }catch(e){ biteHistory = []; }
+  renderBiteLog();
+}
+async function saveBiteHistory(){
+  try{ await storage.set('bite:'+currentAccount, JSON.stringify(biteHistory)); }catch(e){}
+}
+function renderBiteLog(){
+  const log = document.getElementById('bite-log');
+  log.innerHTML = '';
+  if(biteHistory.length === 0){
+    const hint = document.createElement('div');
+    hint.className = 'bite-line system';
+    hint.textContent = 'Ask biteAI anything to get started.';
+    log.appendChild(hint);
+    return;
+  }
+  biteHistory.forEach(m=>{
+    addBiteLine(m.role === 'user' ? 'user' : 'model', m.content || '', false);
+  });
+  log.scrollTop = log.scrollHeight;
+}
+function addBiteCopyBtn(div, getText){
+  const btn = document.createElement('button');
+  btn.className = 'bite-copy-btn';
+  btn.textContent = '⧉ Copy';
+  btn.addEventListener('click', async ()=>{
+    const text = getText();
+    try{
+      await navigator.clipboard.writeText(text);
+      showToast('Copied.');
+      return;
+    }catch(e){}
+    try{
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast(ok ? 'Copied.' : 'Copy blocked — select the text manually.');
+    }catch(e){ showToast('Copy blocked — select the text manually.'); }
+  });
+  div.appendChild(btn);
+}
+function addBiteLine(role, text, scroll){
+  const log = document.getElementById('bite-log');
+  const div = document.createElement('div');
+  div.className = 'bite-line ' + role;
+  const textSpan = document.createElement('span');
+  textSpan.textContent = text;
+  div.appendChild(textSpan);
+  if(role === 'model'){
+    addBiteCopyBtn(div, ()=> textSpan.textContent);
+  }
+  log.appendChild(div);
+  if(scroll !== false) log.scrollTop = log.scrollHeight;
+  return { div, textSpan };
+}
+function addBiteTyping(){
+  const log = document.getElementById('bite-log');
+  const div = document.createElement('div');
+  div.className = 'bite-line typing';
+  div.textContent = 'thinking…';
+  log.appendChild(div);
+  log.scrollTop = log.scrollHeight;
+  return div;
+}
+function setBiteBusy(isBusy){
+  document.getElementById('bite-send-btn').disabled = isBusy;
+  document.getElementById('bite-stop-btn').style.display = isBusy ? 'block' : 'none';
+}
+async function sendBiteMessage(){
+  const input = document.getElementById('bite-input');
+  const text = input.value.trim();
+  if(!text) return;
+  input.value = '';
+  setBiteBusy(true);
+
+  const empty = document.querySelector('#bite-log .bite-line.system');
+  if(empty && biteHistory.length===0) empty.remove();
+
+  addBiteLine('user', text);
+  biteHistory.push({ role:'user', content: text });
+  saveBiteHistory();
+
+  const useStream = document.getElementById('bite-stream-checkbox').checked;
+  biteAbortController = new AbortController();
+
+  if(useStream){
+    await sendBiteMessageStreaming(biteAbortController.signal);
+  } else {
+    await sendBiteMessageBuffered(biteAbortController.signal);
+  }
+}
+async function sendBiteMessageBuffered(signal){
+  const typingDiv = addBiteTyping();
+  try{
+    const resp = await fetch(BITE_WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'mistral-large', messages: biteHistory }),
+      signal
+    });
+    const data = await resp.json();
+    if(data.error) throw new Error(data.error.message || 'biteAI error');
+    const reply = data.choices?.[0]?.message?.content || '(no response)';
+    typingDiv.remove();
+    addBiteLine('model', reply);
+    biteHistory.push({ role:'assistant', content: reply });
+    saveBiteHistory();
+  }catch(err){
+    typingDiv.remove();
+    if(err.name === 'AbortError'){
+      addBiteLine('system', 'Stopped.');
+    } else {
+      addBiteLine('system', 'Connection error — ' + (err.message || 'could not reach biteAI.'));
+    }
+  }finally{
+    setBiteBusy(false);
+    document.getElementById('bite-input').focus();
+  }
+}
+async function sendBiteMessageStreaming(signal){
+  const typingDiv = addBiteTyping();
+  let liveLine = null;
+  let fullText = '';
+  try{
+    const resp = await fetch(BITE_WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'mistral-large', messages: biteHistory, stream: true }),
+      signal
+    });
+    if(!resp.body || !resp.body.getReader){
+      throw new Error('Streaming not supported by the Worker yet — try again with Stream turned off, or update the Worker code.');
+    }
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    typingDiv.remove();
+    liveLine = addBiteLine('model', '', true);
+
+    while(true){
+      const { value, done } = await reader.read();
+      if(done) break;
+      buffer += decoder.decode(value, { stream:true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop();
+      for(const line of lines){
+        const trimmed = line.trim();
+        if(!trimmed.startsWith('data:')) continue;
+        const payload = trimmed.slice(5).trim();
+        if(payload === '[DONE]') continue;
+        try{
+          const json = JSON.parse(payload);
+          const delta = json.choices?.[0]?.delta?.content || '';
+          if(delta){
+            fullText += delta;
+            liveLine.textSpan.textContent = fullText;
+            document.getElementById('bite-log').scrollTop = document.getElementById('bite-log').scrollHeight;
+          }
+        }catch(e){}
+      }
+    }
+    if(!fullText) fullText = '(no response)';
+    biteHistory.push({ role:'assistant', content: fullText });
+    saveBiteHistory();
+  }catch(err){
+    if(typingDiv.parentNode) typingDiv.remove();
+    if(err.name === 'AbortError'){
+      if(liveLine) liveLine.textSpan.textContent = fullText + ' [stopped]';
+      if(fullText){
+        biteHistory.push({ role:'assistant', content: fullText });
+        saveBiteHistory();
+      }
+    } else {
+      if(liveLine) liveLine.div.remove();
+      addBiteLine('system', 'Connection error — ' + (err.message || 'could not reach biteAI.'));
+    }
+  }finally{
+    setBiteBusy(false);
+    document.getElementById('bite-input').focus();
+  }
+}
+document.getElementById('bite-send-btn').addEventListener('click', sendBiteMessage);
+document.getElementById('bite-stop-btn').addEventListener('click', ()=>{
+  if(biteAbortController) biteAbortController.abort();
+});
+document.getElementById('bite-input').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter') sendBiteMessage();
+});
+document.getElementById('bite-clear-btn').addEventListener('click', async ()=>{
+  const ok = await askConfirm('Clear this conversation?', 'Clear');
+  if(!ok) return;
+  biteHistory = [];
+  await saveBiteHistory();
+  renderBiteLog();
+});
+
+/* ===================== INIT ===================== */
+async function init(){
+  renderTileIcons();
+  renderLogo();
+  await loadTheme();
+  await loadAccounts();
+  await loadNotesForAccount();
+  await loadGameDataForAccount();
+  await loadBiteHistoryForAccount();
+  await loadCalcHistoryForAccount();
+  showView('home');
+}
+init();
+</script>
+</body>
+</html>

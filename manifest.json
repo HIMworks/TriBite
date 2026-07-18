@@ -1,0 +1,14 @@
+{
+  "name": "TriBite",
+  "short_name": "TriBite",
+  "description": "Calculate. Play. Write. — a calculator, pixel runner, notes app, and AI assistant in one place.",
+  "start_url": "https://himworks.github.io/tribite/",
+  "scope": "https://himworks.github.io/tribite/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d0f14",
+  "theme_color": "#3B9DFF",
+  "icons": [
+    { "src": "favicon.png", "sizes": "64x64", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
